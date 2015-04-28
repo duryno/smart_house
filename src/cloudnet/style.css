@@ -1,0 +1,27 @@
+.mainFxmlClass {
+
+}
+
+.bgr {
+    -fx-background-color: #fff;
+}
+
+.button {
+    -fx-font-family: 'Roboto', sans-serif;
+    -fx-text-fill: white;
+    -fx-background-color: #2196f3;
+     -fx-font-size: 24px;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.3) , 2, 0.0 , 0 , 1 );
+}
+
+.button:pressed {
+    -fx-text-fill: white;
+    -fx-background-color: #1565c0;
+}
+
+#welcome {
+    -fx-font-family: 'Roboto', sans-serif;
+    -fx-text-fill: #2196f3;
+    -fx-font-size: 48px;
+    -fx-font-weight: lighter;
+}
