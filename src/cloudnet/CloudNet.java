@@ -40,30 +40,30 @@ public class CloudNet extends Application {
         stage.setScene(scene);
         stage.show();
         
-        URL url = new URL("http://jorsino.com/cloudnet/login.php");
-        //String urlParameters = "id="+"null"+"&username="+"juraj"+"&password="+"pass";
-        String urlParameters = "username="+"juraj"+"&password="+"pass";
-        HttpURLConnection hp=(HttpURLConnection)url.openConnection();
-        hp.setDoInput(true);
-        hp.setDoOutput(true);
-        hp.setInstanceFollowRedirects(false);
-        hp.setRequestMethod("POST");
-        hp.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
-        hp.setRequestProperty("charset", "utf-8");
-        hp.setRequestProperty("Content-Length", "" + Integer.toString(urlParameters.getBytes().length));
-        hp.setUseCaches (false);
-        DataOutputStream wr = new DataOutputStream(hp.getOutputStream ());
-        wr.writeBytes(urlParameters);
-        wr.flush();
-        String line;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(hp.getInputStream()));
-        while(reader.ready()) {
-            line = reader.readLine();
-            System.out.println(line);
-        }
-        wr.close();
-        reader.close();
-        hp.disconnect();
+//        URL url = new URL("http://jorsino.com/cloudnet/login.php");
+//        //String urlParameters = "id="+"null"+"&username="+"juraj"+"&password="+"pass";
+//        String urlParameters = "username="+"juraj"+"&password="+"pass";
+//        HttpURLConnection hp=(HttpURLConnection)url.openConnection();
+//        hp.setDoInput(true);
+//        hp.setDoOutput(true);
+//        hp.setInstanceFollowRedirects(false);
+//        hp.setRequestMethod("POST");
+//        hp.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
+//        hp.setRequestProperty("charset", "utf-8");
+//        hp.setRequestProperty("Content-Length", "" + Integer.toString(urlParameters.getBytes().length));
+//        hp.setUseCaches (false);
+//        DataOutputStream wr = new DataOutputStream(hp.getOutputStream ());
+//        wr.writeBytes(urlParameters);
+//        wr.flush();
+//        String line;
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(hp.getInputStream()));
+//        while(reader.ready()) {
+//            line = reader.readLine();
+//            System.out.println(line);
+//        }
+//        wr.close();
+//        reader.close();
+//        hp.disconnect();
         
         
 //        final String keyForApp = "3arl279eij5125u";
