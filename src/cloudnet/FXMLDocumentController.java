@@ -84,6 +84,7 @@ public class FXMLDocumentController implements Initializable {
             login.checkLogin(getUsername(), getPassword());
 //            SignUp signUp = new SignUp();
 //            signUp.createUser("email", getUsername(), getPassword());
+            loginButtonPressed();
         } catch(Exception ex) {
             ex.printStackTrace();
         }
