@@ -19,6 +19,10 @@
     -fx-background-color: #1565c0;
 }
 
+.textArea {
+    -fx-font-size: 18px;
+}
+
 #welcome {
     -fx-font-family: 'Roboto', sans-serif;
     -fx-text-fill: #2196f3;
