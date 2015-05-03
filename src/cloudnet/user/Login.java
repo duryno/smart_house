@@ -18,6 +18,8 @@ import com.dropbox.core.*;
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 
 /**
@@ -28,9 +30,9 @@ public class Login {
     
     private static final String LOGIN_URL = "http://jorsino.com/cloudnet/login.php";
     
-    public void checkLogin(String username, String password) throws Exception {        
+    public boolean checkLogin(String username, String password) throws Exception {        
         URL url = new URL(LOGIN_URL);
-        String urlParameters = "username="+username+"&password="+password;
+        String urlParameters = "username="+username+"&password="+calculateHash(password);
         HttpURLConnection hp=(HttpURLConnection)url.openConnection();
         hp.setDoInput(true);
         hp.setDoOutput(true);
@@ -52,6 +54,31 @@ public class Login {
         wr.close();
         reader.close();
         hp.disconnect();
+        
+        if(line.equals("1"))
+            return true;
+        else 
+            return false;
+    }
+    
+    private String calculateHash(String password) {
+        StringBuffer hash = new StringBuffer();
+        try {
+            MessageDigest md=MessageDigest.getInstance("MD5");
+            byte[] pwd = password.getBytes();
+            md.update(pwd);
+            byte[] hashVal = md.digest();
+            for (int i = 0; i < hashVal.length; i++) {
+                String hex = Integer.toHexString(0xFF & hashVal[i]);
+                if (hex.length() == 1) {
+                  hash.append('0');
+                }
+                hash.append(hex);
+            }            
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } 
+        return hash.toString();
     }
     
 }

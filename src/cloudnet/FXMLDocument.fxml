@@ -6,14 +6,26 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="anchorPane" prefHeight="600.0" prefWidth="1000.0" styleClass="bgr" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="cloudnet.FXMLDocumentController">
-  <children>
-    <Button id="logInButton" fx:id="button" layoutX="380.0" layoutY="377.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loginButtonPressed" prefHeight="60.0" prefWidth="240.0" text="Log in" />
-    <TextArea id="password" fx:id="label" layoutX="380.0" layoutY="292.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" />
-    <TextArea id="username" layoutX="380.0" layoutY="207.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" />
-    <Label id="welcome" alignment="CENTER" layoutX="380.0" layoutY="107.0" prefWidth="240.0" text="Welcome!" textFill="#2196f3" />
-  </children>
-  <stylesheets>
-    <URL value="@style.css" />
-  </stylesheets>
+<AnchorPane id="anchorPane" prefHeight="600" prefWidth="1000" styleClass="bgr" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cloudnet.FXMLDocumentController">
+    <children>
+                <PasswordField id="password" fx:id="password" layoutX="380.0" layoutY="292.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" promptText="Password" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" styleClass="textArea" AnchorPane.leftAnchor="380.0">
+                </PasswordField>
+                <TextArea id="username" fx:id="username" layoutX="380.0" layoutY="207.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" promptText="Username" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" styleClass="textArea" AnchorPane.leftAnchor="380.0">
+</TextArea><TextArea id="email" fx:id="email" disable="true" layoutX="380.0" layoutY="377.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" promptText="E-mail address" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" styleClass="textArea" visible="false">
+</TextArea>
+                <Label id="welcome" alignment="CENTER" layoutX="380.0" layoutY="94.0" prefWidth="240.0" text="Welcome!" textFill="#2196f3">
+        </Label><Label fx:id="login" layoutX="414.0" layoutY="165.0" onMouseReleased="#handleLoginClick" text="Log in" textFill="#2196f3">
+<font>
+<Font size="18.0" />
+</font></Label><Label fx:id="signUp" layoutX="517.0" layoutY="165.0" onMouseReleased="#handleSignUpClick" text="Sign Up" textFill="#ababab">
+<font>
+<Font size="18.0" />
+</font>
+</Label>
+        <Button id="logInButton" fx:id="loginButton" layoutX="380.0" layoutY="377.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseReleased="#handleLogInButtonClick" prefHeight="60.0" prefWidth="240.0" text="Log in">
+        </Button> 
+    </children>
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
 </AnchorPane>

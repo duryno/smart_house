@@ -11,6 +11,8 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -20,9 +22,9 @@ public class SignUp {
     
     private static final String SIGN_UP_URL = "http://jorsino.com/cloudnet/register.php";
     
-    public void createUser(String email, String username, String password) throws Exception {        
+    public boolean createUser(String email, String username, String password) throws Exception {        
         URL url = new URL(SIGN_UP_URL);
-        String urlParameters = "id=null&username="+username+"&password="+password+"&email="+email;
+        String urlParameters = "id=null&username="+username+"&password="+calculateHash(password)+"&email="+email;
         HttpURLConnection hp=(HttpURLConnection)url.openConnection();
         hp.setDoInput(true);
         hp.setDoOutput(true);
@@ -44,6 +46,32 @@ public class SignUp {
         wr.close();
         reader.close();
         hp.disconnect();
+        
+        if(line == "1")
+            return true;
+        else 
+            return false;
     }
     
+    private String calculateHash(String password) {
+        StringBuffer hash = new StringBuffer();
+        try {
+            MessageDigest md=MessageDigest.getInstance("MD5");
+            byte[] pwd = password.getBytes();
+            md.update(pwd);
+            byte[] hashVal = md.digest();
+            for (int i = 0; i < hashVal.length; i++) {
+              String hex = Integer.toHexString(0xFF & hashVal[i]);
+              if (hex.length() == 1) {
+                hash.append('0');
+              }
+              hash.append(hex);
+              
+            }            
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } 
+        return hash.toString();
+    }
+        
 }

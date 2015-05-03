@@ -34,6 +34,7 @@ import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -49,7 +50,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     public TextArea username;
     @FXML
-    public TextArea password;
+    public PasswordField password;
     @FXML
     private Button loginButton;
     @FXML
@@ -78,13 +79,20 @@ public class FXMLDocumentController implements Initializable {
     private DbxClient dd;
     
     @FXML
-    public void handleLogInButtonClick(MouseEvent e) {
-        Login login = new Login();
+    public void handleLogInButtonClick(MouseEvent e) {       
+        boolean correct = false;
         try {
-            login.checkLogin(getUsername(), getPassword());
-//            SignUp signUp = new SignUp();
-//            signUp.createUser("email", getUsername(), getPassword());
-            loginButtonPressed();
+            if(loginButton.getText().equals("Log in")) {
+                Login login = new Login();
+                correct = login.checkLogin(getUsername(), getPassword());
+            } else {
+                SignUp signUp = new SignUp();
+                correct = signUp.createUser(getEmail(), getUsername(), getPassword());
+            }
+                       
+            if(correct == true)
+                cloud.goToNextScreenTest();
+            
         } catch(Exception ex) {
             ex.printStackTrace();
         }
@@ -104,6 +112,7 @@ public class FXMLDocumentController implements Initializable {
         moveTo.play(); 
         email.setVisible(true);
         email.setDisable(false);
+        loginButton.setText("Sign up");
     }
     
     @FXML
@@ -120,6 +129,7 @@ public class FXMLDocumentController implements Initializable {
         moveTo.play(); 
         email.setVisible(false);
         email.setDisable(true);
+        loginButton.setText("Log in");
     }
     
     private String getUsername() {
@@ -129,16 +139,20 @@ public class FXMLDocumentController implements Initializable {
     private String getPassword() {
         return password.getText();
     }
+    
+    private String getEmail() {
+        return email.getText();
+    }
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
-    @FXML
-    public void loginButtonPressed() throws IOException, DbxException {
-        cloud.goToNextScreenTest();
-    }
+//    @FXML
+//    public void loginButtonPressed() throws IOException, DbxException {
+//        cloud.goToNextScreenTest();
+//    }
 
     @FXML
     public void addCloud() throws IOException, DbxException {
