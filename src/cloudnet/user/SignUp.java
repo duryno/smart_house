@@ -47,7 +47,7 @@ public class SignUp {
         reader.close();
         hp.disconnect();
         
-        if(line == "1")
+        if(line.equals("1"))
             return true;
         else 
             return false;
