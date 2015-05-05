@@ -7,7 +7,6 @@
 package cloudnet;
 
 import cloudnet.user.Login;
-import cloudnet.user.SignUp;
 import com.dropbox.core.DbxAuthFinish;
 import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxEntry;
@@ -20,23 +19,18 @@ import javafx.animation.TranslateTransition;
 import javafx.animation.TranslateTransitionBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -58,10 +52,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label login;
     @FXML
-    private TextArea email;
-    
-    static String accessToken;
-
+    private TextArea email; 
     @FXML
     Button button, activateButton;
     @FXML
@@ -72,23 +63,28 @@ public class FXMLDocumentController implements Initializable {
     TextField tokenTextField;
     @FXML
     ListView list, fileList;
+    @FXML
+    Label warning;
     
     CloudNet cloud = new CloudNet();
     final String keyForApp = "3arl279eij5125u";
     final String secretKeyForApp = "ic83wodtpty04ut";
     private DbxClient dd;
+    static String accessToken;
+    
+    static final String RED_BORDER = "-fx-border-color: rgb(255, 0, 0);";
+    static final String EMPTY_FIELD = "No field can be empty!";
+    private enum direction {UP, DOWN};
     
     @FXML
     public void handleLogInButtonClick(MouseEvent e) {       
         boolean correct = false;
+        Login login = new Login();
         try {
-            if(loginButton.getText().equals("Log in")) {
-                Login login = new Login();
+            if(loginButton.getText().equals("Log in"))                 
                 correct = login.checkLogin(getUsername(), getPassword());
-            } else {
-                SignUp signUp = new SignUp();
-                correct = signUp.createUser(getEmail(), getUsername(), getPassword());
-            }
+            else
+                correct = login.createUser(getEmail(), getUsername(), getPassword());
                        
             if(correct == true)
                 cloud.goToNextScreenTest();
@@ -102,14 +98,8 @@ public class FXMLDocumentController implements Initializable {
     public void handleSignUpClick(MouseEvent e) {
         signUp.setTextFill(Paint.valueOf("#2196f3"));
         login.setTextFill(Paint.valueOf("#ababab"));
-        TranslateTransition moveTo = TranslateTransitionBuilder.
-            create().
-            toX(loginButton.getLayoutBounds().getMinX()).
-            toY((loginButton.getLayoutBounds().getMinY()+85)-loginButton.getLayoutBounds().getMinY()).
-            duration(Duration.seconds(0.5)).
-            node(loginButton).
-            build();
-        moveTo.play(); 
+        moveNode(loginButton, direction.DOWN);
+        moveNode(warning, direction.DOWN);
         email.setVisible(true);
         email.setDisable(false);
         loginButton.setText("Sign up");
@@ -119,28 +109,59 @@ public class FXMLDocumentController implements Initializable {
     public void handleLoginClick(MouseEvent e) {
         signUp.setTextFill(Paint.valueOf("#ababab"));
         login.setTextFill(Paint.valueOf("#2196f3"));
-        TranslateTransition moveTo = TranslateTransitionBuilder.
-            create().
-            toX(loginButton.getLayoutBounds().getMinX()).
-            toY((loginButton.getLayoutBounds().getMinY())-loginButton.getLayoutBounds().getMinY()).
-            duration(Duration.seconds(0.5)).
-            node(loginButton).
-            build();
-        moveTo.play(); 
+        moveNode(loginButton, direction.UP);
+        moveNode(warning, direction.UP);
         email.setVisible(false);
         email.setDisable(true);
         loginButton.setText("Log in");
     }
     
+    private void moveNode(Node node, direction dir) {
+        double y;
+        if(dir.equals(direction.UP))
+            y = (node.getLayoutBounds().getMinY())-node.getLayoutBounds().getMinY();
+        else
+            y = (node.getLayoutBounds().getMinY()+85)-node.getLayoutBounds().getMinY();
+        
+        TranslateTransition moveTo = TranslateTransitionBuilder.
+            create().
+            toY(y).
+            duration(Duration.seconds(0.5)).
+            node(node).
+            build();
+        moveTo.play(); 
+    } 
+    
     private String getUsername() {
+        String text = username.getText();
+        if(text.isEmpty()) {
+            warning.setText(EMPTY_FIELD);
+            username.setStyle(RED_BORDER);
+        }
         return username.getText();
     }
     
     private String getPassword() {
+        String text = password.getText();
+        if(text.isEmpty()) {
+            warning.setText(EMPTY_FIELD);
+            password.setStyle(RED_BORDER);
+        } else if(loginButton.getText().equals("Sign up") && text.length() < 6) {
+            warning.setText("Password is too short");
+            return "";
+        }
         return password.getText();
     }
     
     private String getEmail() {
+        String text = email.getText();
+        if(text.isEmpty()) {
+            warning.setText(EMPTY_FIELD);
+            email.setStyle(RED_BORDER);
+        } else if(!text.contains("@") || !text.contains(".")) {
+            warning.setText("Invalid e-mail address");
+            return "";
+        }
         return email.getText();
     }
         
@@ -148,11 +169,6 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
-//    @FXML
-//    public void loginButtonPressed() throws IOException, DbxException {
-//        cloud.goToNextScreenTest();
-//    }
 
     @FXML
     public void addCloud() throws IOException, DbxException {

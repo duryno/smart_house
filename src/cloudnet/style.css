@@ -10,7 +10,7 @@
     -fx-font-family: 'Roboto', sans-serif;
     -fx-text-fill: white;
     -fx-background-color: #2196f3;
-     -fx-font-size: 24px;
+    -fx-font-size: 24px;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.3) , 2, 0.0 , 0 , 1 );
 }
 

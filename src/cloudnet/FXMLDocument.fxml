@@ -23,7 +23,10 @@
 </font>
 </Label>
         <Button id="logInButton" fx:id="loginButton" layoutX="380.0" layoutY="377.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseReleased="#handleLogInButtonClick" prefHeight="60.0" prefWidth="240.0" text="Log in">
-        </Button> 
+        </Button><Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" layoutX="380.0" layoutY="457.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="240.0" textFill="RED">
+<font>
+<Font size="18.0" />
+</font></Label> 
     </children>
     <stylesheets>
         <URL value="@style.css" />
