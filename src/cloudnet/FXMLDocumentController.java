@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cloudnet;
 
 import cloudnet.user.Login;
+import cloudnet.user.SignUp;
+import cloudnet.user.UserDropBox;
 import com.dropbox.core.DbxAuthFinish;
 import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxEntry;
@@ -38,9 +39,8 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Juraj
  */
-
 public class FXMLDocumentController implements Initializable {
-    
+
     @FXML
     public TextArea username;
     @FXML
@@ -88,12 +88,13 @@ public class FXMLDocumentController implements Initializable {
                        
             if(correct == true)
                 cloud.goToNextScreenTest();
-            
-        } catch(Exception ex) {
+            }
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    
+
     @FXML
     public void handleSignUpClick(MouseEvent e) {
         signUp.setTextFill(Paint.valueOf("#2196f3"));
@@ -104,7 +105,7 @@ public class FXMLDocumentController implements Initializable {
         email.setDisable(false);
         loginButton.setText("Sign up");
     }
-    
+
     @FXML
     public void handleLoginClick(MouseEvent e) {
         signUp.setTextFill(Paint.valueOf("#ababab"));
@@ -140,7 +141,7 @@ public class FXMLDocumentController implements Initializable {
         }
         return username.getText();
     }
-    
+
     private String getPassword() {
         String text = password.getText();
         if(text.isEmpty()) {
@@ -152,7 +153,7 @@ public class FXMLDocumentController implements Initializable {
         }
         return password.getText();
     }
-    
+
     private String getEmail() {
         String text = email.getText();
         if(text.isEmpty()) {
@@ -164,88 +165,9 @@ public class FXMLDocumentController implements Initializable {
         }
         return email.getText();
     }
-        
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
 
-    @FXML
-    public void addCloud() throws IOException, DbxException {
-        final String authCode;
-
-        Runnable run = new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    activateButton.setVisible(true);
-                    tokenTextField.setVisible(true);
-                    getAccessToken();
-                } catch (IOException | DbxException ex) {
-                    System.out.println("There was an error getting the access token : " + ex);
-                }
-            }
-        };
-        Thread thr = new Thread(run);
-        thr.setDaemon(true); //so when the main program ends, so will this thread.
-        thr.start();
-
-    }
-
-    public void getAccessToken() throws IOException, DbxException {
-        dd = cloud.setUpDropbox(keyForApp, secretKeyForApp);
-        if (dd != null) {
-            System.out.println("success");
-        } else {
-            System.out.println("failure");
-        }
-    }
-
-    public void showCloud() throws DbxException, IOException {
-
-        if (tokenTextField.getText().trim().length() > 0) {
-            accessToken = tokenTextField.getText();
-            DbxAuthFinish finish = cloud.auth.finish(accessToken);
-            String token = finish.accessToken;
-            DbxClient cliee = new DbxClient(cloud.conf, token);
-
-            final DbxEntry.WithChildren file = cliee.getMetadataWithChildren("/");
-            DbxEntry folders = cliee.getMetadata("/");
-
-            //add folders to an arraylist to display
-            
-            //ArrayList<DbxEntry> listOfFiles = new ArrayList();
-            ArrayList<String> listOfFiles2 = new ArrayList<>();
-
-            for (DbxEntry c : file.children) {
-                //listOfFiles.add(c);
-                listOfFiles2.add(c.name);
-            }
-
-            ObservableList<String> itemss = FXCollections.observableArrayList();
-            itemss.addAll(listOfFiles2);
-            list.setItems(itemss);
-            tokenTextField.clear();
-
-            list.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-                @Override
-                public void handle(MouseEvent t) {
-                    if (t.getClickCount() == 2) {
-                        System.out.println("The clicked item was : " + list.getSelectionModel().getSelectedItem());
-                    } else {
-                        //if only clicked once then ignore it
-                    }
-                }
-            });
-        } else {
-            //need to add error message here
-            System.out.println("nothing entered");
-        }
-    }
-    
-    public void logout() throws IOException{
-        cloud.logUserOut();
     }
 }

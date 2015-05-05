@@ -26,11 +26,12 @@ import javafx.stage.Popup;
  */
 public class CloudNet extends Application {
 
-    private static String userInput;
     private static String authCode;
-    private static DbxClient cli;
     static CloudNet proj = new CloudNet();
-    static FXMLDocumentController con = new FXMLDocumentController();
+    
+    public static FXMLDocumentController con = new FXMLDocumentController();
+    public static UserHomeController homeControl = new UserHomeController();
+    
     Scene scene;
     Parent root;
     public static Stage stagey;
@@ -48,8 +49,10 @@ public class CloudNet extends Application {
 
         stage.setScene(scene);
         stage.show();
+        
     }
 
+    //check usage??
     public DbxClient setUpDropbox(String key, String secret) throws IOException, DbxException {
 
         apps = new DbxAppInfo(key, secret);
@@ -77,7 +80,7 @@ public class CloudNet extends Application {
 
     public void goToNextScreenTest() throws IOException {
         FXMLLoader lo = new FXMLLoader(CloudNet.class.getResource("userHome.fxml"));
-
+        lo.setController(homeControl);
         root = FXMLLoader.load(getClass().getResource("userHome.fxml"));
         Scene sc = new Scene(root);
         stagey.setResizable(false);
