@@ -6,7 +6,6 @@
 package cloudnet;
 
 import cloudnet.user.Login;
-import cloudnet.user.SignUp;
 import cloudnet.user.UserDropBox;
 import com.dropbox.core.DbxAuthFinish;
 import com.dropbox.core.DbxClient;
@@ -39,6 +38,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Juraj
  */
+
 public class FXMLDocumentController implements Initializable {
 
     @FXML
@@ -75,6 +75,11 @@ public class FXMLDocumentController implements Initializable {
     static final String RED_BORDER = "-fx-border-color: rgb(255, 0, 0);";
     static final String EMPTY_FIELD = "No field can be empty!";
     private enum direction {UP, DOWN};
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    }
+    
     
     @FXML
     public void handleLogInButtonClick(MouseEvent e) {       
@@ -88,7 +93,6 @@ public class FXMLDocumentController implements Initializable {
                        
             if(correct == true)
                 cloud.goToNextScreenTest();
-            }
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -165,9 +169,5 @@ public class FXMLDocumentController implements Initializable {
         }
         return email.getText();
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-    }
+           
 }
