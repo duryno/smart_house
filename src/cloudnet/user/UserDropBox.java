@@ -16,7 +16,13 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWebAuthNoRedirect;
 import java.awt.Desktop;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -46,6 +52,8 @@ public class UserDropBox {
     private String dropBoxUserAccessToken;
     
     private String pathName = "/";
+    
+    private static final String DROPBOX_URL = "http://jorsino.com/cloudnet/addDropboxToken.php";
 
     public UserDropBox(String dropBoxAccessToken) {
         this.dropBoxUserAccessToken = dropBoxAccessToken;
@@ -162,7 +170,7 @@ public class UserDropBox {
                     }
 
                 }
-            });
+            });            
         } catch (DbxException ex) {
             Logger.getLogger(UserDropBox.class.getName()).log(Level.SEVERE, null, ex);
         } catch(Exception e){
@@ -172,6 +180,39 @@ public class UserDropBox {
     }
 
     private void addTokenToDatabase(String theTokenToAdd) {
-
+        String parameters = "user_id=1&dropbox="+theTokenToAdd+"&onedrive=null&google_drive=null";
+        sendToDatabase(parameters, DROPBOX_URL);
     }
+    
+    private void sendToDatabase(String parameters, String address) {
+        String line = null;
+        try {            
+            URL url = new URL(address);
+            HttpURLConnection hp=(HttpURLConnection)url.openConnection();
+            hp.setDoInput(true);
+            hp.setDoOutput(true);
+            hp.setInstanceFollowRedirects(false);
+            hp.setRequestMethod("POST");
+            hp.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
+            hp.setRequestProperty("charset", "utf-8");
+            hp.setRequestProperty("Content-Length", "" + Integer.toString(parameters.getBytes().length));
+            hp.setUseCaches (false);
+            DataOutputStream wr = new DataOutputStream(hp.getOutputStream ());
+            wr.writeBytes(parameters);
+            wr.flush();            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(hp.getInputStream()));
+            while(reader.ready()) {
+                line = reader.readLine();            
+            }
+            System.out.println(line);
+            wr.close();
+            reader.close();
+            hp.disconnect();
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        }
+                
+        //return checkResult(line);
+    }
+    
 }

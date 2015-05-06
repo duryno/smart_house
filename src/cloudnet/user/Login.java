@@ -58,9 +58,10 @@ public class Login {
             wr.flush();            
             BufferedReader reader = new BufferedReader(new InputStreamReader(hp.getInputStream()));
             while(reader.ready()) {
-                line = reader.readLine();            
+                line = reader.readLine();  
+                System.out.println(line);
             }
-            System.out.println(line);
+            
             wr.close();
             reader.close();
             hp.disconnect();
