@@ -78,10 +78,10 @@ public class CloudNet extends Application {
         return client;
     }
 
-    public void goToNextScreenTest() throws IOException {
-        FXMLLoader lo = new FXMLLoader(CloudNet.class.getResource("userHome.fxml"));
+    public void goToNextScreen(String screen) throws IOException {
+        FXMLLoader lo = new FXMLLoader(CloudNet.class.getResource(screen));
         lo.setController(homeControl);
-        root = FXMLLoader.load(getClass().getResource("userHome.fxml"));
+        root = FXMLLoader.load(getClass().getResource(screen));
         Scene sc = new Scene(root);
         stagey.setResizable(false);
         stagey.setOpacity(1);

@@ -42,7 +42,7 @@ import javafx.scene.layout.AnchorPane;
 public class FXMLDocumentController implements Initializable {
 
     @FXML
-    public TextArea username;
+    public TextField username;
     @FXML
     public PasswordField password;
     @FXML
@@ -52,7 +52,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label login;
     @FXML
-    private TextArea email; 
+    private TextField email; 
     @FXML
     Button button, activateButton;
     @FXML
@@ -74,6 +74,8 @@ public class FXMLDocumentController implements Initializable {
     
     static final String RED_BORDER = "-fx-border-color: rgb(255, 0, 0);";
     static final String EMPTY_FIELD = "No field can be empty!";
+    static final String USER_HOME_SCREEN = "userHome.fxml";
+    static final String NO_ACCOUNTS_SCREEN = "noAccountsScreen.fxml";
     private enum direction {UP, DOWN};
 
     @Override
@@ -82,17 +84,19 @@ public class FXMLDocumentController implements Initializable {
     
     
     @FXML
-    public void handleLogInButtonClick(MouseEvent e) {       
+    public void handleLogInButtonAction() {       
         boolean correct = false;
         Login login = new Login();
         try {
-            if(loginButton.getText().equals("Log in"))                 
+            if(loginButton.getText().equals("Log in")) {                
                 correct = login.checkLogin(getUsername(), getPassword());
-            else
+                if(correct == true)
+                    cloud.goToNextScreen(USER_HOME_SCREEN);
+            } else {
                 correct = login.createUser(getEmail(), getUsername(), getPassword());
-                       
-            if(correct == true)
-                cloud.goToNextScreenTest();
+                if(correct == true)
+                    cloud.goToNextScreen(NO_ACCOUNTS_SCREEN);
+            }
 
         } catch (Exception ex) {
             ex.printStackTrace();

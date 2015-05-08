@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cloudnet.NoAccountsScreenController">
+<children><ImageView id="dropbox_icon" fitHeight="60.0" fitWidth="70.0" layoutX="490.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+<image>
+<Image url="@../images/dropbox_inactive.png" />
+</image></ImageView>
+<ImageView id="dropbox_icon" fitHeight="60.0" fitWidth="70.0" layoutX="590.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+<image>
+<Image url="@../images/google_drive_inactive.png" />
+</image>
+</ImageView>
+<ImageView id="dropbox_icon" fitHeight="60.0" fitWidth="70.0" layoutX="690.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+<image>
+<Image url="@../images/onedrive_inactive.png" />
+</image>
+</ImageView><Pane layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="250.0" styleClass="side_panel">
+<children><Button fx:id="logout" layoutX="34.0" layoutY="330.0" mnemonicParsing="false" onMouseReleased="#logout" styleClass="logout_button" text="Log Out">
+<graphic><ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="logout_img">
+<image>
+<Image url="@../images/ic_exit_to_app_white_48dp.png" />
+</image></ImageView>
+</graphic>
+<font>
+<Font size="24.0" />
+</font></Button>
+</children></Pane><Button alignment="CENTER" contentDisplay="CENTER" layoutX="505.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseReleased="#handlePlusButtonClick" prefHeight="240.0" prefWidth="240.0" styleClass="plus_button" textAlignment="CENTER" textFill="WHITE">
+<font>
+<Font name="System Bold" size="96.0" />
+</font>
+<graphic><ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+<image>
+<Image url="@../images/ic_add_white_48dp.png" />
+</image></ImageView>
+</graphic></Button><Label layoutX="475.0" layoutY="525.0" text="Start by connecting your first Account" textFill="#0d47a1">
+<font>
+<Font size="18.0" />
+</font></Label><Pane layoutY="110.0" prefHeight="70.0" prefWidth="1000.0" styleClass="menu_panel" /><Button fx:id="circleDropbox" layoutX="415.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#handleDropboxCircleClick" prefHeight="90.0" prefWidth="90.0" styleClass="cloud_circle,dropbox" visible="false" />
+<Button fx:id="circleGoogle" layoutX="581.0" layoutY="145.0" mnemonicParsing="false" onMouseClicked="#handleGoogleCircleClick" prefHeight="90.0" prefWidth="90.0" styleClass="cloud_circle,google_drive" visible="false" />
+<Button fx:id="circleOnedrive" layoutX="745.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#handleOneDriveCircleClick" prefHeight="90.0" prefWidth="90.0" styleClass="cloud_circle,onedrive" visible="false" />
+</children>
+<stylesheets>
+    <URL value="@button_style.css" />
+</stylesheets>
+</AnchorPane>

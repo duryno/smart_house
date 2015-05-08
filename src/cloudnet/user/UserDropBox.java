@@ -55,12 +55,11 @@ public class UserDropBox {
     
     private static final String DROPBOX_URL = "http://jorsino.com/cloudnet/addDropboxToken.php";
 
-    public UserDropBox(String dropBoxAccessToken) {
-        this.dropBoxUserAccessToken = dropBoxAccessToken;
+    public UserDropBox() {
     }
 
-    public void intialDropboxSetup(String key, String secret) {
-        apps = new DbxAppInfo(key, secret);
+    public void initialDropboxSetup() {
+        apps = new DbxAppInfo(keyForApp, secretKeyForApp);
         conf = new DbxRequestConfig("CloudNet/1.0", Locale.getDefault().toString());
         auth = new DbxWebAuthNoRedirect(conf, apps);
         String authoriseAccess = auth.start();

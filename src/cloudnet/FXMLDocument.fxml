@@ -8,21 +8,22 @@
 
 <AnchorPane id="anchorPane" prefHeight="600" prefWidth="1000" styleClass="bgr" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cloudnet.FXMLDocumentController">
     <children>
-                <PasswordField id="password" fx:id="password" layoutX="380.0" layoutY="292.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" promptText="Password" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" styleClass="textArea" AnchorPane.leftAnchor="380.0">
+                
+                <TextField id="username" fx:id="username" layoutX="380.0" layoutY="207.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" promptText="Username" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" styleClass="textArea" AnchorPane.leftAnchor="380.0">
+</TextField><PasswordField id="password" fx:id="password" layoutX="380.0" layoutY="292.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" promptText="Password" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" styleClass="textArea" AnchorPane.leftAnchor="380.0">
                 </PasswordField>
-                <TextArea id="username" fx:id="username" layoutX="380.0" layoutY="207.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" promptText="Username" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" styleClass="textArea" AnchorPane.leftAnchor="380.0">
-</TextArea><TextArea id="email" fx:id="email" disable="true" layoutX="380.0" layoutY="377.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" promptText="E-mail address" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" styleClass="textArea" visible="false">
-</TextArea>
-                <Label id="welcome" alignment="CENTER" layoutX="380.0" layoutY="94.0" prefWidth="240.0" text="Welcome!" textFill="#2196f3">
-        </Label><Label fx:id="login" layoutX="414.0" layoutY="165.0" onMouseReleased="#handleLoginClick" text="Log in" textFill="#2196f3">
+<TextField id="email" fx:id="email" disable="true" layoutX="380.0" layoutY="377.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="240.0" promptText="E-mail address" style="-fx-border-color: #e0e0e0; -fx-border-width: 1px;" styleClass="textArea" visible="false">
+</TextField>
+                <Label id="welcome" alignment="CENTER" focusTraversable="false" layoutX="380.0" layoutY="94.0" prefWidth="240.0" text="Welcome!" textFill="#2196f3">
+        </Label><Label fx:id="login" focusTraversable="false" layoutX="414.0" layoutY="165.0" onMouseReleased="#handleLoginClick" text="Log in" textFill="#2196f3">
 <font>
 <Font size="18.0" />
-</font></Label><Label fx:id="signUp" layoutX="517.0" layoutY="165.0" onMouseReleased="#handleSignUpClick" text="Sign Up" textFill="#ababab">
+</font></Label><Label fx:id="signUp" focusTraversable="false" layoutX="517.0" layoutY="165.0" onMouseReleased="#handleSignUpClick" text="Sign Up" textFill="#ababab">
 <font>
 <Font size="18.0" />
 </font>
 </Label>
-        <Button id="logInButton" fx:id="loginButton" layoutX="380.0" layoutY="377.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseReleased="#handleLogInButtonClick" prefHeight="60.0" prefWidth="240.0" text="Log in">
+        <Button id="logInButton" fx:id="loginButton" layoutX="380.0" layoutY="377.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleLogInButtonAction" prefHeight="60.0" prefWidth="240.0" text="Log in">
         </Button><Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" layoutX="380.0" layoutY="457.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="240.0" textFill="RED">
 <font>
 <Font size="18.0" />

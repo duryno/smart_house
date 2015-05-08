@@ -73,10 +73,10 @@ public class Login {
     }
     
     private boolean checkResult(String result) {
-        if(result.equals("1"))
-            return true;
-        else 
+        if(result.equals("00"))
             return false;
+        else 
+            return true;
     }
     
     private String calculateHash(String password) {

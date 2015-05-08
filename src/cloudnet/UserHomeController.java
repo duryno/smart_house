@@ -51,10 +51,8 @@ public class UserHomeController implements Initializable {
     public static ListView secondList;
 
     CloudNet cloud = new CloudNet();
-    UserDropBox drop = new UserDropBox(accessToken);
+    UserDropBox drop = new UserDropBox();
 
-    final String keyForApp = "3arl279eij5125u";
-    final String secretKeyForApp = "ic83wodtpty04ut";
     private DbxClient dd;
 
     @Override
@@ -72,7 +70,7 @@ public class UserHomeController implements Initializable {
                 activateButton.setVisible(true);
                 tokenTextField.setVisible(true);
 
-                drop.intialDropboxSetup(keyForApp, secretKeyForApp);
+                drop.initialDropboxSetup();
 
             }
         };
@@ -87,6 +85,7 @@ public class UserHomeController implements Initializable {
         drop.showCloud(tokenTextField.getText());
     }
 
+    //moved to noAccounts
     public void logout() throws IOException {
         cloud.logUserOut();
     }

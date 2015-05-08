@@ -1,0 +1,48 @@
+.plus_button {
+    -fx-background-radius: 120px;
+    -fx-background-color: #2196f3;
+    -fx-effect: dropshadow( gaussian, #999,  5, 0, 2, 2 );
+}
+.plus_button:pressed {
+    -fx-background-color: #1976d2;
+}
+.plus_button:focused {
+    -fx-background-insets: 0, 0, 0, 0;
+}
+.side_panel {
+    -fx-background-color: #e3f2fd;
+}
+.menu_panel {
+    -fx-background-color: #2196f3;
+    -fx-effect: dropshadow( gaussian, #2196f3,  5, 0, 0, 1 );
+}
+.logout_button {
+    -fx-background-color: #e3f2fd;
+    -fx-text-fill: #0d47a1;
+}
+.logout_img {
+    -fx-effect: dropshadow( gaussian, #999,  3, 0, 1, 1 );
+}
+.cloud_circle {
+    -fx-background-radius: 45px;
+    -fx-background-color: #fff;
+    -fx-border-width: 2px;
+    -fx-border-color: #2196f3;
+    -fx-border-radius: 45px;
+    -fx-background-size: 60 60;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-insets: 0, 0, 0, 0;
+}
+.cloud_circle:pressed {
+    -fx-border-color: #1976d2;
+}
+.dropbox {
+    -fx-background-image: url("../images/dropbox.png");    
+}
+.google_drive {
+    -fx-background-image: url("../images/google_drive.png");  
+}
+.onedrive {
+    -fx-background-image: url("../images/onedrive.png");  
+}
