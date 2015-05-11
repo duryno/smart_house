@@ -6,6 +6,7 @@
 
 package cloudnet;
 
+import cloudnet.user.User;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -85,7 +86,7 @@ public class CloudNet extends Application {
         Scene sc = new Scene(root);
         stagey.setResizable(false);
         stagey.setOpacity(1);
-        stagey.setTitle("Juraj's CloudNet");
+        stagey.setTitle("CloudNet");
         stagey.setScene(sc);
         stagey.show();
     }

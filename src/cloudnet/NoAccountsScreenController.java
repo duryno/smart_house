@@ -6,13 +6,19 @@
 
 package cloudnet;
 
+import static cloudnet.CloudNet.homeControl;
+import static cloudnet.CloudNet.stagey;
 import cloudnet.user.UserDropBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -29,6 +35,10 @@ public class NoAccountsScreenController implements Initializable {
     Button circleGoogle;
     @FXML
     Button circleOnedrive;
+    @FXML
+    Button plusButton;
+    @FXML
+    Label infoText;
     
     CloudNet cloud = new CloudNet();
     UserDropBox drop = new UserDropBox();
@@ -45,14 +55,25 @@ public class NoAccountsScreenController implements Initializable {
     
     public void handleDropboxCircleClick(MouseEvent event) {
         drop.initialDropboxSetup();
+        changeToActivateScreen();
     }
     
     public void handleGoogleCircleClick(MouseEvent event) {
-        
+        changeToActivateScreen();
     }
     
     public void handleOneDriveCircleClick(MouseEvent event) {
-        
+        changeToActivateScreen();
+    }
+    
+    private void changeToActivateScreen() {
+        plusButton.setVisible(false);
+        circleDropbox.setVisible(false);
+        circleGoogle.setVisible(false);
+        circleOnedrive.setVisible(false);   
+        infoText.setVisible(false);
+//        FXMLLoader lo = new FXMLLoader(CloudNet.class.getResource("noAccountsScreen.fxml"));
+//        lo.setController(homeControl);
     }
     
     public void logout(MouseEvent event)throws IOException {

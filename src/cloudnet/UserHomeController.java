@@ -20,7 +20,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -49,7 +51,13 @@ public class UserHomeController implements Initializable {
     public static ListView listFolders;
     @FXML
     public static ListView secondList;
-
+    @FXML
+    public static TextField directoryText;
+    @FXML
+    public static ContextMenu choiceMenu;
+    @FXML
+    public static MenuItem copy, paste, download, fileFolderProperties;
+    
     CloudNet cloud = new CloudNet();
     UserDropBox drop = new UserDropBox();
 
@@ -57,8 +65,9 @@ public class UserHomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-    }
+        activateButton.setVisible(true);
+        tokenTextField.setVisible(true);
+   }
 
     @FXML
     public void addCloud() throws IOException, DbxException {
@@ -99,11 +108,12 @@ public class UserHomeController implements Initializable {
     public void setSecondList(ObservableList listt){
         listFolders.setItems(listt);
         //secondList.setItems(listt);
-        
+    
     }
     
     @FXML
     public void clearTextView(){
         tokenTextField.clear();
     }
+    
 }

@@ -9,6 +9,17 @@
 .plus_button:focused {
     -fx-background-insets: 0, 0, 0, 0;
 }
+.activate_button {
+    -fx-font-family: 'Roboto', sans-serif;
+    -fx-text-fill: white;
+    -fx-background-color: #2196f3;
+    -fx-font-size: 24px;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.3) , 2, 0.0 , 0 , 1 );
+}
+.activate_button:pressed {
+    -fx-text-fill: white;
+    -fx-background-color: #1565c0;
+}
 .side_panel {
     -fx-background-color: #e3f2fd;
 }

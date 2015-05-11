@@ -42,9 +42,9 @@ import javafx.scene.layout.AnchorPane;
 public class FXMLDocumentController implements Initializable {
 
     @FXML
-    public TextField username;
+    public static TextField username;
     @FXML
-    public PasswordField password;
+    public static PasswordField password;
     @FXML
     private Button loginButton;
     @FXML
@@ -64,18 +64,20 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     ListView list, fileList;
     @FXML
-    Label warning;
-    
+    static Label warning;
+
     CloudNet cloud = new CloudNet();
     final String keyForApp = "3arl279eij5125u";
     final String secretKeyForApp = "ic83wodtpty04ut";
     private DbxClient dd;
     static String accessToken;
-    
+
     static final String RED_BORDER = "-fx-border-color: rgb(255, 0, 0);";
     static final String EMPTY_FIELD = "No field can be empty!";
     static final String USER_HOME_SCREEN = "userHome.fxml";
     static final String NO_ACCOUNTS_SCREEN = "noAccountsScreen.fxml";
+    static final String NO_USER = "No user found / password incorrect";
+    
     private enum direction {UP, DOWN};
 
     @Override
@@ -88,7 +90,7 @@ public class FXMLDocumentController implements Initializable {
         boolean correct = false;
         Login login = new Login();
         try {
-            if(loginButton.getText().equals("Log in")) {                
+            if(loginButton.getText().equals("Log in")) {     
                 correct = login.checkLogin(getUsername(), getPassword());
                 if(correct == true)
                     cloud.goToNextScreen(USER_HOME_SCREEN);
@@ -97,7 +99,7 @@ public class FXMLDocumentController implements Initializable {
                 if(correct == true)
                     cloud.goToNextScreen(NO_ACCOUNTS_SCREEN);
             }
-
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -124,23 +126,23 @@ public class FXMLDocumentController implements Initializable {
         email.setDisable(true);
         loginButton.setText("Log in");
     }
-    
+
     private void moveNode(Node node, direction dir) {
         double y;
         if(dir.equals(direction.UP))
             y = (node.getLayoutBounds().getMinY())-node.getLayoutBounds().getMinY();
         else
             y = (node.getLayoutBounds().getMinY()+85)-node.getLayoutBounds().getMinY();
-        
+
         TranslateTransition moveTo = TranslateTransitionBuilder.
-            create().
-            toY(y).
-            duration(Duration.seconds(0.5)).
-            node(node).
-            build();
-        moveTo.play(); 
-    } 
-    
+                create().
+                toY(y).
+                duration(Duration.seconds(0.5)).
+                node(node).
+                build();
+        moveTo.play();
+    }
+
     private String getUsername() {
         String text = username.getText();
         if(text.isEmpty()) {
@@ -173,5 +175,11 @@ public class FXMLDocumentController implements Initializable {
         }
         return email.getText();
     }
-           
+    
+     public void handleNoUser() {
+        warning.setText(NO_USER);
+        username.setStyle(RED_BORDER);
+        password.setStyle(RED_BORDER);
+    }
+    
 }
