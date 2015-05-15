@@ -19,6 +19,7 @@ import com.dropbox.core.*;
 import java.awt.Desktop;
 import java.net.URI;
 import java.util.Locale;
+import javafx.scene.layout.Pane;
 import javafx.stage.Popup;
 
 /**
@@ -29,9 +30,14 @@ public class CloudNet extends Application {
 
     private static String authCode;
     static CloudNet proj = new CloudNet();
+    public static DBConnector connector = new DBConnector();
     
     public static FXMLDocumentController con = new FXMLDocumentController();
     public static UserHomeController homeControl = new UserHomeController();
+    public static NoAccountsScreenController noAccounts = new NoAccountsScreenController();
+    
+    public static final String NEW_USER = "newUser";
+    public static final String EXISTING_USER = "existingUser";
     
     Scene scene;
     Parent root;

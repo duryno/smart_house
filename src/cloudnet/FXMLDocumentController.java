@@ -93,7 +93,7 @@ public class FXMLDocumentController implements Initializable {
             if(loginButton.getText().equals("Log in")) {     
                 correct = login.checkLogin(getUsername(), getPassword());
                 if(correct == true)
-                    cloud.goToNextScreen(USER_HOME_SCREEN);
+                    cloud.goToNextScreen(NO_ACCOUNTS_SCREEN);
             } else {
                 correct = login.createUser(getEmail(), getUsername(), getPassword());
                 if(correct == true)

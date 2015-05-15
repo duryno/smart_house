@@ -7,7 +7,7 @@ package cloudnet.user;
 
 import cloudnet.CloudNet;
 import cloudnet.FXMLDocumentController;
-import cloudnet.UserHomeController;
+import cloudnet.NoAccountsScreenController;
 import com.dropbox.core.DbxAppInfo;
 import com.dropbox.core.DbxAuthFinish;
 import com.dropbox.core.DbxClient;
@@ -54,8 +54,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class UserDropBox {
 
-    DbxClient cliee;
-    private static final String DROPBOX_URL = "http://jorsino.com/cloudnet/addDropboxToken.php";
+    static DbxClient cliee;
+    private static final String DROPBOX_URL = "http://jorsino.com/cloudnet/addDropboxToken.php";    
+    public static final String DROPBOX_CLOUD = "dropboxCloud";    
 
     final String keyForApp = "3arl279eij5125u";
     final String secretKeyForApp = "ic83wodtpty04ut";
@@ -68,7 +69,7 @@ public class UserDropBox {
 
     private String dropBoxUserAccessToken;
     
-    private String pathName = "/";
+    private static String pathName = "/";
 
     private String currentDirectory = "";
 
@@ -77,31 +78,37 @@ public class UserDropBox {
     public UserDropBox() {
     }
 
-    public void initialDropboxSetup() {
+    public void initialDropboxSetup(String userType) {
         apps = new DbxAppInfo(keyForApp, secretKeyForApp);
-        conf = new DbxRequestConfig("CloudNet/1.0", Locale.getDefault().toString());
+        conf = new DbxRequestConfig("CloxudNet/1.0", Locale.getDefault().toString());
         auth = new DbxWebAuthNoRedirect(conf, apps);
         String authoriseAccess = auth.start();
 
-        Desktop desk = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-        URI uri = URI.create(authoriseAccess);
-        if (desk != null && desk.isSupported(Desktop.Action.BROWSE)) {
-            try {
-                desk.browse(uri);
-            } catch (Exception e) {
-                System.out.println("Error in retrieving URI" + e);
+        if(userType.equals(CloudNet.NEW_USER)) {
+            Desktop desk = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+            URI uri = URI.create(authoriseAccess);
+            if (desk != null && desk.isSupported(Desktop.Action.BROWSE)) {
+                try {
+                    desk.browse(uri);
+                } catch (Exception e) {
+                    System.out.println("Error in retrieving URI" + e);
+                }
             }
         }
     }
 
-    public void showCloud(String tokenn) {
+    public void showCloud(String tokenn, String userType) {
         dropBoxUserAccessToken = tokenn;
 
         if (tokenn.trim().length() > 0) {
             try {
                 accessToken = tokenn;
-                DbxAuthFinish finish = auth.finish(accessToken);
-                cliee = new DbxClient(conf, finish.accessToken);
+                
+                if(userType.equals(CloudNet.NEW_USER)) {
+                    DbxAuthFinish finish = auth.finish(accessToken);
+                    accessToken = finish.accessToken;
+                }
+                cliee = new DbxClient(conf, accessToken);
 
                 final DbxEntry.WithChildren file = cliee.getMetadataWithChildren("/");
                 ArrayList<String> listOfFiles2 = new ArrayList<>();
@@ -111,16 +118,19 @@ public class UserDropBox {
                 }
 
                 final ObservableList<String> itemss = FXCollections.observableArrayList(listOfFiles2);
-                CloudNet.homeControl.clearTextView();
+                CloudNet.noAccounts.clearTextView();
+                CloudNet.noAccounts.setListItems(itemss, DROPBOX_CLOUD);
 
                 displayFolder("", cliee);
 
                 addMenu();
-                addTokenToDatabase(tokenn);
+                if(userType.equals(CloudNet.NEW_USER))
+                    addTokenToDatabase(accessToken);
 
             } catch (DbxException ex) {
                 //add error message here as well
                 System.out.println("The token added was wrong : " + ex);
+                ex.printStackTrace();
             }
         } else {
             //need to add error message here and send user back to adding token
@@ -128,10 +138,10 @@ public class UserDropBox {
         }
     }
 
-    private void displayFolder(String folderName, DbxClient client) {
+    public static void displayFolder(String folderName, DbxClient client) {
         try {
             pathName = pathName.concat(folderName);
-            DbxEntry.WithChildren file = client.getMetadataWithChildren(pathName);
+            DbxEntry.WithChildren file = cliee.getMetadataWithChildren(pathName);
             pathName = pathName.concat("/");
 
             ArrayList<String> list = new ArrayList<>();
@@ -142,20 +152,20 @@ public class UserDropBox {
 
             final ObservableList<String> itemss = FXCollections.observableArrayList(list);
 
-            CloudNet.homeControl.setListItems(itemss);
+            CloudNet.noAccounts.setListItems(itemss, DROPBOX_CLOUD);
 
-            UserHomeController.listFolders.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-                @Override
-                public void handle(MouseEvent t) {
-                    if (t.getClickCount() == 2) {
-                        currentDirectory = UserHomeController.listFolders.getSelectionModel().getSelectedItem().toString();
-                        displayFolder(UserHomeController.listFolders.getSelectionModel().getSelectedItem().toString(), cliee);
-                    } else {
-                        currentDirectory = UserHomeController.listFolders.getSelectionModel().getSelectedItem().toString();
-                    }
-                }
-            });
+//            NoAccountsScreenController.listFolders.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//
+//                @Override
+//                public void handle(MouseEvent t) {
+//                    if (t.getClickCount() == 2) {
+//                        currentDirectory = NoAccountsScreenController.listFolders.getSelectionModel().getSelectedItem().toString();
+//                        displayFolder(NoAccountsScreenController.listFolders.getSelectionModel().getSelectedItem().toString(), cliee);
+//                    } else {
+//                        currentDirectory = NoAccountsScreenController.listFolders.getSelectionModel().getSelectedItem().toString();
+//                    }
+//                }
+//            });
 
         } catch (DbxException ex) {
             System.out.println("Client not recognised ! Error: " + ex);
@@ -166,28 +176,28 @@ public class UserDropBox {
     }
 
     public void addMenu() {
-        UserHomeController.copy.setOnAction(new EventHandler<ActionEvent>() {
+        NoAccountsScreenController.copy.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {
                 System.out.println("copy");
             }
         });
-        UserHomeController.paste.setOnAction(new EventHandler<ActionEvent>() {
+        NoAccountsScreenController.paste.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {
                 System.out.println("paste");
             }
         });
-        UserHomeController.download.setOnAction(new EventHandler<ActionEvent>() {
+        NoAccountsScreenController.download.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {
                 downLoadFile();
             }
         });
-        UserHomeController.fileFolderProperties.setOnAction(new EventHandler<ActionEvent>() {
+        NoAccountsScreenController.fileFolderProperties.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {
@@ -207,7 +217,7 @@ public class UserDropBox {
 
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-                    UserHomeController.choiceMenu.hide();
+                    NoAccountsScreenController.choiceMenu.hide();
 
                     String filename = currentDirectory;
                     JFileChooser savefile = new JFileChooser();
@@ -271,39 +281,16 @@ public class UserDropBox {
     }
 
     private void addTokenToDatabase(String theTokenToAdd) {
-        String parameters = "user_id=1&dropbox="+theTokenToAdd+"&onedrive=null&google_drive=null";
-        sendToDatabase(parameters, DROPBOX_URL);
+        String parameters = "user_id="+User.getId()+"&dropbox="+theTokenToAdd+"&onedrive=null&google_drive=null";
+        CloudNet.connector.sendToDatabase(parameters, DROPBOX_URL);
     }
     
-    private void sendToDatabase(String parameters, String address) {
-        String line = null;
-        try {            
-            URL url = new URL(address);
-            HttpURLConnection hp=(HttpURLConnection)url.openConnection();
-            hp.setDoInput(true);
-            hp.setDoOutput(true);
-            hp.setInstanceFollowRedirects(false);
-            hp.setRequestMethod("POST");
-            hp.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
-            hp.setRequestProperty("charset", "utf-8");
-            hp.setRequestProperty("Content-Length", "" + Integer.toString(parameters.getBytes().length));
-            hp.setUseCaches (false);
-            DataOutputStream wr = new DataOutputStream(hp.getOutputStream ());
-            wr.writeBytes(parameters);
-            wr.flush();            
-            BufferedReader reader = new BufferedReader(new InputStreamReader(hp.getInputStream()));
-            while(reader.ready()) {
-                line = reader.readLine();            
-            }
-            System.out.println(line);
-            wr.close();
-            reader.close();
-            hp.disconnect();
-        } catch(IOException ex) {
-            ex.printStackTrace();
-        }
-                
-        //return checkResult(line);
+    public void setCurrentDirectory(String dir) {
+        currentDirectory = dir;
+    }
+    
+    public DbxClient getCliee() {
+        return cliee;
     }
     
 }

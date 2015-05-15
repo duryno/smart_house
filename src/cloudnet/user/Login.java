@@ -68,7 +68,7 @@ public class Login {
             wr.flush();
             BufferedReader reader = new BufferedReader(new InputStreamReader(hp.getInputStream()));
 
-            String id = reader.readLine();   
+            String id = reader.readLine();  
             if(id.equals("00")) {
                 allowedAccess = false;
                 controller.handleNoUser();
@@ -109,7 +109,7 @@ public class Login {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
+        
         return allowedAccess;
     }
 
