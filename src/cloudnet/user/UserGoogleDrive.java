@@ -19,6 +19,7 @@ import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.ChildList;
 import com.google.api.services.drive.model.ChildReference;
 import com.google.api.services.drive.model.File;
+import com.google.api.services.drive.model.FileList;
 import java.awt.Desktop;
 
 import java.io.BufferedReader;
@@ -42,98 +43,84 @@ public class UserGoogleDrive {
     private static String REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob";
     
     static Drive service;
-    static Drive.Children.List request;
+    static Drive.Files.List filesRequest;
     static final HttpTransport httpTransport = new NetHttpTransport();
     static final JsonFactory jsonFactory = new JacksonFactory();
     static final GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, Arrays.asList(DriveScopes.DRIVE))
-                .setAccessType("online")
+                .setAccessType("offline")
                 .setApprovalPrompt("auto").build();
 
-    public void initialGoogleDriveSetup() {             
-
-            String url = flow.newAuthorizationUrl().setRedirectUri(REDIRECT_URI).build();
-            System.out.println("Please open the following URL in your browser then type the authorization code:");
-            Desktop desk = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-            URI uri = URI.create(url);
-            if (desk != null && desk.isSupported(Desktop.Action.BROWSE)) {
-                try {
-                    desk.browse(uri);
-                } catch (Exception e) {
-                    System.out.println("Error in retrieving URI" + e);
-                }
+    public void initialGoogleDriveSetup() {            
+        String url = flow.newAuthorizationUrl().setRedirectUri(REDIRECT_URI).build();
+        Desktop desk = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        URI uri = URI.create(url);
+        if (desk != null && desk.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desk.browse(uri);
+            } catch (Exception e) {
+                System.out.println("Error in retrieving URI" + e);
             }
-        
-            //System.out.println("  " + url);
-            
-            
+        }                        
     }         
     
-    public void printFilesInFolder(String userType, String folderId, String token)
-            throws IOException {
-        
-        final String type = userType;
-        final String code = token;
-        final String id = folderId;
-        
-//        Runnable run = new Runnable() {
-//
-//                @Override
-//                public void run() {                    
-                    
-                    try {
-                        GoogleTokenResponse response;
-                        if (type.equals(CloudNet.NEW_USER)) {
-                            //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                            //String code = ();
-
-                            response = flow.newTokenRequest(code).setRedirectUri(REDIRECT_URI).execute();
-
-                            addTokenToDatabase(code);
-                        } else {
-                            response = flow.newTokenRequest(User.getGoogleToken()).setRedirectUri(REDIRECT_URI).execute();
-                        }
-                        GoogleCredential credential = new GoogleCredential().setFromTokenResponse(response);
-                        //Create a new authorized API client
-                        service = new Drive.Builder(httpTransport, jsonFactory, credential).build();
-                        request = service.children().list(id).setQ("trashed = false");
-                        //printFilesInFolder("root");
-
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                
-            
-            
-//            Thread thread = new Thread(run);
-//            thread.setDaemon(true);
-//            thread.start();
-            
-//        Drive.Children.List request = service.children().list(folderId).setQ("trashed = false");
+    public void printFilesInFolder(String userType, String folderId, String token) {        
+        GoogleCredential credential;
         ArrayList<File> files = new ArrayList();
+
+        try {
+            GoogleTokenResponse response;
+            if (userType.equals(CloudNet.NEW_USER)) {
+                response = flow.newTokenRequest(token).setRedirectUri(REDIRECT_URI).execute();
+
+                System.out.println("access: " + response.getAccessToken());
+                System.out.println("referesh: " + response.getRefreshToken());
+                addTokenToDatabase(response.getRefreshToken());
+                User.setGoogleToken(String.valueOf(response.getRefreshToken()));
+
+                credential = new GoogleCredential().setAccessToken(response.getAccessToken());
+            } else {
+                GoogleCredential.Builder b = new GoogleCredential.Builder();
+                b.setJsonFactory(jsonFactory);
+                b.setTransport(httpTransport);
+                b.setClientSecrets(CLIENT_ID, CLIENT_SECRET);
+                credential = b.build();
+                credential.setRefreshToken(token);
+                credential.refreshToken();
+                credential.setAccessToken(credential.getAccessToken());
+            }
+
+            //Create a new authorized API client
+            service = new Drive.Builder(httpTransport, jsonFactory, credential).setApplicationName("CloudNet").build();
+            filesRequest = service.files().list().setQ("trashed = false and '" + folderId + "' in parents");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
         do {
             try {
-              ChildList children = request.execute();
+                FileList filesList = filesRequest.execute();
 
-              for (ChildReference child : children.getItems()) {
-                File file = service.files().get(child.getId()).execute();
-                System.out.println("File name: " + file.getTitle());
-                files.add(file);
-              }
-              request.setPageToken(children.getNextPageToken());
+                for (File file : filesList.getItems()) {
+                    files.add(file);
+                    System.out.println(file.getTitle());
+                }
+
+                filesRequest.setPageToken(filesList.getNextPageToken());
             } catch (IOException e) {
-              System.out.println("An error occurred: " + e);
-              request.setPageToken(null);
+                System.out.println("An error occurred: " + e);
+                filesRequest.setPageToken(null);
             }
-          } while (request.getPageToken() != null &&
-                   request.getPageToken().length() > 0);
-        
+        } while (filesRequest.getPageToken() != null
+                && filesRequest.getPageToken().length() > 0);
+
         CloudNet.noAccounts.setListItems(files, GOOGLE_CLOUD);
     }
 
     
     private void addTokenToDatabase(String theTokenToAdd) {
-        String parameters = "user_id="+User.getId()+"&dropbox=null&onedrive=null&google_drive="+theTokenToAdd;
+        String parameters = "user_id="+User.getId()+"&dropbox=null&box=null&google_drive="+theTokenToAdd;
         CloudNet.connector.sendToDatabase(parameters, GOOGLE_URL);
     }
     

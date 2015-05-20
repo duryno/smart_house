@@ -9,16 +9,12 @@ package cloudnet.user;
  *
  * @author Juraj
  */
-public class User {
+public abstract class User {
 
     private static String id;
     private static String dropboxToken;
     private static String googleToken;
     private static String oneDriveToken;
-
-    public User(String id) {
-        this.id = id;
-    }
     
     public static void setID(String userID){
         id = userID;

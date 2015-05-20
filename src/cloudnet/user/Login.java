@@ -67,7 +67,7 @@ public class Login {
             wr.writeBytes(parameters);
             wr.flush();
             BufferedReader reader = new BufferedReader(new InputStreamReader(hp.getInputStream()));
-
+            
             String id = reader.readLine();  
             if(id.equals("00")) {
                 allowedAccess = false;
@@ -82,8 +82,8 @@ public class Login {
 
                 if (line.startsWith("dropbox")) {
                     dropBoxToken = line.substring(8, line.length());
-                } else if (line.startsWith("onedrive")) {
-                    oneDriveToken = line.substring(9, line.length());
+                } else if (line.startsWith("box")) {
+                    oneDriveToken = line.substring(4, line.length());
                 } else if (line.startsWith("google_drive")) {
                     google_driveToken = line.substring(13, line.length());
                 }
@@ -92,9 +92,9 @@ public class Login {
             System.out.println("Dropbox token " + dropBoxToken);
             System.out.println("OneDrive token " + oneDriveToken);
             System.out.println("GoogleDrive token " + google_driveToken);
-            User.setDropboxToken(dropBoxToken);
-            User.setOneDriveToken(oneDriveToken);
-            User.setGoogleToken(google_driveToken);
+            User.setDropboxToken(String.valueOf(dropBoxToken));
+            User.setOneDriveToken(String.valueOf(oneDriveToken));
+            User.setGoogleToken(String.valueOf(google_driveToken));
 
 //            if (allowedAccess) {
 //                line = "1";

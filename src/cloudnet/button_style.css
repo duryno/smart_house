@@ -57,3 +57,54 @@
 .onedrive {
     -fx-background-image: url("../images/onedrive.png");  
 }
+.back_button {
+    -fx-background-radius: 30px;
+    -fx-background-color: #fff;
+    -fx-background-size: 60 60;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-insets: 0, 0, 0, 0;
+}
+.back {
+    -fx-background-image: url("../images/ic_arrow_back_grey600_36dp.png");  
+}
+.folder {
+    -fx-background-image: url("../images/folder.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 128 120;
+    -fx-background-position: 61 25;
+}
+.file {
+    -fx-background-image: url("../images/file.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 119 128;
+    -fx-background-position: 65 21;
+}
+.scroll-pane {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+.dropbox_icon {
+    -fx-background-image: url("../images/dropbox.png");
+}
+.google_icon {
+    -fx-background-image: url("../images/google_drive.png");
+}
+.onedrive_icon {
+    -fx-background-image: url("../images/onedrive.png");
+}
+.dropbox_icon:pressed {
+    -fx-opacity: 1;
+}
+.google_icon:pressed {
+    -fx-opacity: 1;
+}
+.onedrive_icon:pressed {
+    -fx-opacity: 1;
+}
+.icon_button {
+    -fx-background-color: #fff;
+    -fx-background-insets: 0;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}

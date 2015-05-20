@@ -33,7 +33,6 @@ public class CloudNet extends Application {
     public static DBConnector connector = new DBConnector();
     
     public static FXMLDocumentController con = new FXMLDocumentController();
-    public static UserHomeController homeControl = new UserHomeController();
     public static NoAccountsScreenController noAccounts = new NoAccountsScreenController();
     
     public static final String NEW_USER = "newUser";
@@ -87,7 +86,6 @@ public class CloudNet extends Application {
 
     public void goToNextScreen(String screen) throws IOException {
         FXMLLoader lo = new FXMLLoader(CloudNet.class.getResource(screen));
-        lo.setController(homeControl);
         root = FXMLLoader.load(getClass().getResource(screen));
         Scene sc = new Scene(root);
         stagey.setResizable(false);

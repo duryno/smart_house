@@ -7,21 +7,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cloudnet.NoAccountsScreenController">
-<children><TextField fx:id="tokenTextField" layoutX="525.0" layoutY="355.0" prefHeight="40.0" prefWidth="200.0" visible="false" /><ImageView id="dropbox_icon" fx:id="box" fitHeight="60.0" fitWidth="70.0" layoutX="490.0" layoutY="25.0" onMouseClicked="#handleDropboxCircleClick" pickOnBounds="true" preserveRatio="true">
-<image>
-<Image url="@../images/dropbox_inactive.png" />
-</image></ImageView>
-<ImageView id="dropbox_icon" fitHeight="60.0" fitWidth="70.0" layoutX="590.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-<image>
-<Image url="@../images/google_drive_inactive.png" />
-</image>
-</ImageView>
-<ImageView id="dropbox_icon" fitHeight="60.0" fitWidth="70.0" layoutX="690.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-<image>
-<Image url="@../images/onedrive_inactive.png" />
-</image>
-</ImageView><Pane layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="250.0" styleClass="side_panel">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDone="#scrollPaneDragAndDrop" onDragDropped="#scrollPaneDragAndDrop" onMouseDragReleased="#scrollPaneDragAndDrop" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cloudnet.NoAccountsScreenController">
+<children><TextField fx:id="tokenTextField" layoutX="525.0" layoutY="355.0" prefHeight="40.0" prefWidth="200.0" visible="false" /><Pane layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="250.0" styleClass="side_panel">
 <children><Button fx:id="logout" layoutX="34.0" layoutY="330.0" mnemonicParsing="false" onMouseReleased="#logout" styleClass="logout_button" text="Log Out">
 <graphic><ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="logout_img">
 <image>
@@ -42,10 +29,8 @@
 </graphic></Button><Label fx:id="infoText" layoutX="475.0" layoutY="525.0" text="Start by connecting your first Account" textFill="#2196f3">
 <font>
 <Font size="18.0" />
-</font></Label><Pane layoutY="110.0" prefHeight="70.0" prefWidth="1000.0" styleClass="menu_panel" /><Button fx:id="circleDropbox" layoutX="415.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#handleDropboxCircleClick" prefHeight="90.0" prefWidth="90.0" styleClass="cloud_circle,dropbox" visible="false" />
-<Button fx:id="circleGoogle" layoutX="581.0" layoutY="145.0" mnemonicParsing="false" onMouseClicked="#handleGoogleCircleClick" prefHeight="90.0" prefWidth="90.0" styleClass="cloud_circle,google_drive" visible="false" />
-<Button fx:id="circleOnedrive" layoutX="745.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#handleOneDriveCircleClick" prefHeight="90.0" prefWidth="90.0" styleClass="cloud_circle,onedrive" visible="false" /><Button fx:id="activateButton" layoutX="525.0" layoutY="405.0" mnemonicParsing="false" onAction="#showCloud" prefHeight="40.0" prefWidth="200.0" styleClass="activate_button" text="Activate" visible="false" />
-<ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="250.0" layoutY="181.0" onContextMenuRequested="#addMenu" prefHeight="420.0" prefWidth="750.0" vbarPolicy="ALWAYS" visible="false">
+</font></Label>
+<ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="250.0" layoutY="180.0" onContextMenuRequested="#addMenu" onDragDropped="#scrollPaneDragAndDrop" onMouseDragReleased="#scrollPaneDragAndDrop" prefHeight="420.0" prefWidth="750.0" vbarPolicy="ALWAYS" visible="false">
   <contextMenu>
         <ContextMenu fx:id="choiceMenu">
           <items>
@@ -57,9 +42,14 @@
         </ContextMenu>
       </contextMenu>
     <content>
-    <AnchorPane fx:id="listFolders" minHeight="0.0" minWidth="0.0" prefHeight="418.0" prefWidth="750.0" style="-fx-background-color: #fff;" />
+    <AnchorPane fx:id="listFolders" minHeight="0.0" minWidth="0.0" onDragDone="#scrollPaneDragAndDrop" onDragDropped="#scrollPaneDragAndDrop" onMouseDragReleased="#scrollPaneDragAndDrop" prefHeight="418.0" prefWidth="750.0" style="-fx-background-color: #fff;" />
   </content>
-</ScrollPane>
+</ScrollPane><Pane layoutY="110.0" onDragDone="#scrollPaneDragAndDrop" onDragDropped="#scrollPaneDragAndDrop" onMouseDragReleased="#scrollPaneDragAndDrop" prefHeight="70.0" prefWidth="1000.0" styleClass="menu_panel">
+<children><Button layoutX="252.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="back_button,back" />
+</children></Pane><Button fx:id="circleDropbox" layoutX="415.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#handleDropboxCircleClick" prefHeight="90.0" prefWidth="90.0" styleClass="cloud_circle,dropbox" visible="false" />
+<Button fx:id="circleGoogle" layoutX="581.0" layoutY="145.0" mnemonicParsing="false" onMouseClicked="#handleGoogleCircleClick" prefHeight="90.0" prefWidth="90.0" styleClass="cloud_circle,google_drive" visible="false" />
+<Button fx:id="circleOnedrive" layoutX="745.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#handleOneDriveCircleClick" prefHeight="90.0" prefWidth="90.0" styleClass="cloud_circle,onedrive" visible="false" /><Button fx:id="activateButton" layoutX="525.0" layoutY="405.0" mnemonicParsing="false" onAction="#showCloud" prefHeight="40.0" prefWidth="200.0" styleClass="activate_button" text="Activate" visible="false" /><Button fx:id="dropboxIcon" layoutX="487.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onDragDone="#dropboxIconDragAndDrop" onDragDropped="#dropboxIconDragAndDrop" onMouseClicked="#handleTopDropboxIconClick" onMouseDragReleased="#dropboxIconDragAndDrop" opacity="0.25" prefHeight="60.0" prefWidth="60.0" styleClass="icon_button,dropbox_icon" AnchorPane.bottomAnchor="515.0">
+</Button><Button fx:id="googleIcon" layoutX="592.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#handleTopGoogleIconClick" opacity="0.25" prefHeight="60.0" prefWidth="60.0" styleClass="icon_button,google_icon" /><Button fx:id="oneDriveIcon" layoutX="697.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" opacity="0.25" prefHeight="60.0" prefWidth="60.0" styleClass="icon_button,onedrive_icon" />
 </children>
 <stylesheets>
     <URL value="@button_style.css" />

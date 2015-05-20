@@ -6,7 +6,6 @@
 package cloudnet.user;
 
 import cloudnet.CloudNet;
-import cloudnet.FXMLDocumentController;
 import cloudnet.NoAccountsScreenController;
 import com.dropbox.core.DbxAppInfo;
 import com.dropbox.core.DbxAuthFinish;
@@ -15,35 +14,22 @@ import com.dropbox.core.DbxEntry;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWebAuthNoRedirect;
-import java.awt.Color;
-import java.awt.Cursor;
+import com.dropbox.core.DbxWriteMode;
 import java.awt.Desktop;
-import java.awt.Dialog;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
-import javafx.stage.WindowEvent;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -118,14 +104,17 @@ public class UserDropBox {
                 }
 
                 final ObservableList<String> itemss = FXCollections.observableArrayList(listOfFiles2);
-                CloudNet.noAccounts.clearTextView();
-                CloudNet.noAccounts.setListItems(itemss, DROPBOX_CLOUD);
+                //CloudNet.noAccounts.clearTextView();
+                if(userType.equals(CloudNet.EXISTING_USER))
+                    CloudNet.noAccounts.setListItems(itemss, DROPBOX_CLOUD);
 
                 displayFolder("", cliee);
 
                 addMenu();
-                if(userType.equals(CloudNet.NEW_USER))
+                if(userType.equals(CloudNet.NEW_USER)) {
                     addTokenToDatabase(accessToken);
+                    User.setDropboxToken(String.valueOf(accessToken));
+                }
 
             } catch (DbxException ex) {
                 //add error message here as well
@@ -153,20 +142,6 @@ public class UserDropBox {
             final ObservableList<String> itemss = FXCollections.observableArrayList(list);
 
             CloudNet.noAccounts.setListItems(itemss, DROPBOX_CLOUD);
-
-//            NoAccountsScreenController.listFolders.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//
-//                @Override
-//                public void handle(MouseEvent t) {
-//                    if (t.getClickCount() == 2) {
-//                        currentDirectory = NoAccountsScreenController.listFolders.getSelectionModel().getSelectedItem().toString();
-//                        displayFolder(NoAccountsScreenController.listFolders.getSelectionModel().getSelectedItem().toString(), cliee);
-//                    } else {
-//                        currentDirectory = NoAccountsScreenController.listFolders.getSelectionModel().getSelectedItem().toString();
-//                    }
-//                }
-//            });
-
         } catch (DbxException ex) {
             System.out.println("Client not recognised ! Error: " + ex);
         } catch (Exception e) {
@@ -180,7 +155,7 @@ public class UserDropBox {
 
             @Override
             public void handle(ActionEvent t) {
-                System.out.println("copy");
+                uploadFile();
             }
         });
         NoAccountsScreenController.paste.setOnAction(new EventHandler<ActionEvent>() {
@@ -207,37 +182,37 @@ public class UserDropBox {
     }
 
      public void downLoadFile() {
-
-        Runnable run = new Runnable() {
+         Runnable run = new Runnable() {
 
             @Override
             public void run() {
                 try {
                     FileOutputStream fos = null;
-
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
                     NoAccountsScreenController.choiceMenu.hide();
 
-                    String filename = currentDirectory;
                     JFileChooser savefile = new JFileChooser();
-                    savefile.setSelectedFile(new File(filename));
                     savefile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                    savefile.setApproveButtonText("Download file");
-                    savefile.setForeground(Color.BLUE);
                     int cho = savefile.showSaveDialog(null);
 
                     if (cho == JFileChooser.APPROVE_OPTION) {
-                        String selectedDirectory = savefile.getCurrentDirectory().toString();
-                        System.out.println("The current directory is : " + selectedDirectory);
+                        String selectedDirectory = savefile.getSelectedFile().getAbsolutePath();
+                        System.out.println("The selected directory was : " + selectedDirectory);
 
-                        File file = new File(selectedDirectory);
+                        File file = new File(selectedDirectory + "\\" + currentDirectory);
+                        file.createNewFile();                
                         fos = new FileOutputStream(file);
-                        DbxEntry.File download = cliee.getFile("/" + currentDirectory, null, fos);
-                        System.out.println("File downloaded to : " + selectedDirectory);
+
+                        DbxEntry ee = cliee.getMetadata("/" + currentDirectory);
+                        if (ee.isFolder()) {
+                            //need to add some error code
+                            System.out.println("TRIED TO DOWNLOAD FOLDER");
+                        } else {
+                            DbxEntry down = cliee.getFile("/" + currentDirectory, null, fos);
+                            System.out.println("File downloaded to : " + selectedDirectory);
+
+                        }
                         fos.close();
-                    } else {
-                        savefile.setOpaque(true);
                     }
 
                 } catch (FileNotFoundException ex) {
@@ -248,26 +223,48 @@ public class UserDropBox {
             }
         };
         Thread thr = new Thread(run);
-        thr.setDaemon(true); //so when the main program ends, so will this thread.
+        thr.setDaemon(true);
         thr.start();
-
     }
 
-    private void uploadFile() {
-        FileChooser fileChooser = new FileChooser();
+    public void uploadFile() {
+        
+        Runnable run = new Runnable() {
 
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg");
-        fileChooser.getExtensionFilters().add(extFilter);
+            @Override
+            public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-        File file = fileChooser.showOpenDialog(CloudNet.stagey);
+                    FileInputStream fis = null;
 
-        if (file != null) {
+                    System.out.println("the curr : " + currentDirectory);
 
-            String fileName = file.getName();
-            String fileExtension = fileName.substring(fileName.indexOf(".") + 1, file.getName().length());
-            System.out.println(">> fileExtension" + fileExtension);
+                    JFileChooser saveFile = new JFileChooser();     
+                    File inputFile; // = new File("");
+                    saveFile.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                    int cho = saveFile.showOpenDialog(null);
 
-        }
+                    if (cho == JFileChooser.APPROVE_OPTION) {
+                        String selectedDirectory = saveFile.getSelectedFile().getAbsolutePath();
+                        String selectedFile = saveFile.getSelectedFile().getName();
+                        System.out.println("The current file that wants to be downloaded is : " + selectedDirectory);
+                        inputFile = new File(selectedDirectory);
+                        System.out.println("input file = " + inputFile.toString());
+                        fis = new FileInputStream(inputFile);
+
+                        DbxEntry.File fileToUpload = cliee.uploadFile("/" + selectedFile, DbxWriteMode.add(), inputFile.length(), fis);
+                        System.out.println(fileToUpload.asFile().toStringMultiline());
+                    }
+
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException | DbxException | IOException ex) {
+                    Logger.getLogger(UserDropBox.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        Thread thread = new Thread(run);
+        thread.setDaemon(true);
+        thread.start();
 
     }
 
@@ -281,7 +278,7 @@ public class UserDropBox {
     }
 
     private void addTokenToDatabase(String theTokenToAdd) {
-        String parameters = "user_id="+User.getId()+"&dropbox="+theTokenToAdd+"&onedrive=null&google_drive=null";
+        String parameters = "user_id="+User.getId()+"&dropbox="+theTokenToAdd+"&box=null&google_drive=null";
         CloudNet.connector.sendToDatabase(parameters, DROPBOX_URL);
     }
     
