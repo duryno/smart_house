@@ -93,7 +93,7 @@ public class Login {
             System.out.println("OneDrive token " + oneDriveToken);
             System.out.println("GoogleDrive token " + google_driveToken);
             User.setDropboxToken(String.valueOf(dropBoxToken));
-            User.setOneDriveToken(String.valueOf(oneDriveToken));
+            User.setBoxToken(String.valueOf(oneDriveToken));
             User.setGoogleToken(String.valueOf(google_driveToken));
 
 //            if (allowedAccess) {

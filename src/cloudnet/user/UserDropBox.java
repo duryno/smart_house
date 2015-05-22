@@ -55,7 +55,7 @@ public class UserDropBox {
 
     private String dropBoxUserAccessToken;
     
-    private static String pathName = "/";
+    public static String pathName = "/";
 
     private String currentDirectory = "";
 
@@ -108,9 +108,9 @@ public class UserDropBox {
                 if(userType.equals(CloudNet.EXISTING_USER))
                     CloudNet.noAccounts.setListItems(itemss, DROPBOX_CLOUD);
 
-                displayFolder("", cliee);
+                displayFolder("", cliee, "forward");
 
-                addMenu();
+                //addMenu();
                 if(userType.equals(CloudNet.NEW_USER)) {
                     addTokenToDatabase(accessToken);
                     User.setDropboxToken(String.valueOf(accessToken));
@@ -127,9 +127,14 @@ public class UserDropBox {
         }
     }
 
-    public static void displayFolder(String folderName, DbxClient client) {
-        try {
+    public static void displayFolder(String folderName, DbxClient client, String direction) {
+         if (direction.equals("forward")) {
             pathName = pathName.concat(folderName);
+        } else if (direction.equals("backward")) {
+            pathName = folderName;
+        }
+        try {
+            //pathName = pathName.concat(folderName);
             DbxEntry.WithChildren file = cliee.getMetadataWithChildren(pathName);
             pathName = pathName.concat("/");
 
@@ -267,6 +272,28 @@ public class UserDropBox {
         thread.start();
 
     }
+    
+    public void uploadDroppedFile(final File file) {
+        Runnable run = new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    FileInputStream fis = null;                        
+                    File fileToUpload = new File(file.getAbsolutePath());
+                    fis = new FileInputStream(fileToUpload);
+
+                    cliee.uploadFile("/" + file.getName(), DbxWriteMode.add(), fileToUpload.length(), fis);                   
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread thread = new Thread(run);
+        thread.setDaemon(true);
+        thread.start();
+    }
 
     private void showProperties() {
         try {
@@ -284,6 +311,10 @@ public class UserDropBox {
     
     public void setCurrentDirectory(String dir) {
         currentDirectory = dir;
+    }
+    
+    public String getCurrentDirectory() {
+        return currentDirectory;
     }
     
     public DbxClient getCliee() {

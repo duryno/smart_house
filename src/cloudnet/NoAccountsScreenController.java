@@ -8,11 +8,13 @@ package cloudnet;
 
 import static cloudnet.CloudNet.stagey;
 import cloudnet.user.User;
+import cloudnet.user.UserBoxCloud;
 import cloudnet.user.UserDropBox;
 import cloudnet.user.UserGoogleDrive;
 import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxException;
 import com.google.api.services.drive.model.File;
+import com.google.api.services.drive.model.ParentReference;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,6 +22,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -35,12 +38,15 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -99,15 +105,20 @@ public class NoAccountsScreenController implements Initializable {
     Button googleIcon;
     @FXML
     Button oneDriveIcon;
-    String cloudClicked = "";
+    String cloudClicked;
+    @FXML
+    Button backButton;
     
     CloudNet cloud = new CloudNet();
     static UserDropBox drop = new UserDropBox();
     static UserGoogleDrive google = new UserGoogleDrive();
+    static UserBoxCloud box = new UserBoxCloud();
 
-    List<File> googleFiles = new ArrayList<>();
+    static List<File> googleFiles = new ArrayList<>();
     int filesIndex = 0;
     private DbxClient dd;    
+    String droppedFilePath = null;
+
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {     
@@ -117,10 +128,49 @@ public class NoAccountsScreenController implements Initializable {
         } else if(!User.getGoogleToken().equals("null"))    
             google.printFilesInFolder(CloudNet.EXISTING_USER, "root", User.getGoogleToken());
                     
-        if(User.getDropboxToken() != null && !User.getDropboxToken().equals("null"))
-            showConnectedIcon(dropboxIcon);
-        if(User.getGoogleToken() != null && !User.getGoogleToken().equals("null"))
-            showConnectedIcon(googleIcon);
+        if(!User.getDropboxToken().equals("null")) {
+            cloudClicked = "dropbox";
+            selectIcon(dropboxIcon);        
+        }
+        if(!User.getGoogleToken().equals("null")) {
+            if(User.getDropboxToken().equals("null")) {
+                cloudClicked = "google";
+                selectIcon(googleIcon);
+            } else 
+                showConnectedIcon(googleIcon);        
+        }
+            
+        listFolders.setOnDragOver(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                if (db.hasFiles()) {
+                    event.acceptTransferModes(TransferMode.COPY);
+                } else {
+                    event.consume();
+                }
+            }
+        });
+        
+        listFolders.setOnDragDropped(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasFiles()) {
+                    success = true;                    
+                    for (java.io.File file:db.getFiles()) {
+                        if(cloudClicked.equals("dropbox"))
+                            drop.uploadDroppedFile(file);
+                        else 
+                            google.uploadDroppedFile(file);
+                    }
+                }
+                event.setDropCompleted(success);
+                event.consume();
+            }
+        });
+        
     }
     
     public void handlePlusButtonClick(MouseEvent event) {
@@ -141,8 +191,10 @@ public class NoAccountsScreenController implements Initializable {
         cloudClicked = "google";
     }
     
-    public void handleOneDriveCircleClick(MouseEvent event) {
+    public void handleBoxCircleClick(MouseEvent event) {
+        box.initialBoxSetUp(CloudNet.NEW_USER);
         changeToActivateScreen();
+        cloudClicked = "box";
     }
     
     private void changeToActivateScreen() {
@@ -189,6 +241,9 @@ public class NoAccountsScreenController implements Initializable {
             drop.showCloud(tokenTextField.getText(), CloudNet.NEW_USER);
         } else if(cloudClicked.equals("google")) {
             google.printFilesInFolder(CloudNet.NEW_USER, "root", tokenTextField.getText());
+            google.addLevel("root");
+        } else if(cloudClicked.equals("box")) {
+            box.showBox(tokenTextField.getText());
         }
         tokenTextField.clear();
     }
@@ -199,8 +254,12 @@ public class NoAccountsScreenController implements Initializable {
     }
 
     @FXML
-    public void setListItems(List ol, String cloud) {
-        googleFiles = ol;
+    public void setListItems(List ol, final String cloud) {        
+        if(cloud.equals("googleCloud")) {
+            googleFiles.removeAll(googleFiles);
+            for(int i=0; i<ol.size(); i++) 
+                googleFiles.add((File)ol.get(i));
+        }
         labels = new Label[ol.size()];
         folders = new Pane[ol.size()];
         listFolders.getChildren().removeAll(listFolders.getChildren());
@@ -232,12 +291,14 @@ public class NoAccountsScreenController implements Initializable {
             else 
                 type = "folder";
             
-            if(labels[i].getText().length() > 25)
-                labels[i].setText(labels[i].getText().substring(0, 25)+"...");
+//            if(labels[i].getText().length() > 25)
+//                labels[i].setText(labels[i].getText().substring(0, 25)+"...");
             labels[i].setLayoutY(170);
             labels[i].setMinWidth(250);
+            labels[i].setMaxWidth(250);
             labels[i].setMinHeight(30);
-            labels[i].setAlignment(Pos.CENTER);            
+            labels[i].setAlignment(Pos.CENTER);         
+            labels[i].setTextOverrun(OverrunStyle.ELLIPSIS);
                         
             folders[i].getChildren().add(labels[i]);
             folders[i].getStyleClass().add(type);
@@ -249,18 +310,25 @@ public class NoAccountsScreenController implements Initializable {
                 public void handle(MouseEvent t) {
                     Object source = t.getSource();
                     Pane clickedFolder = (Pane)source;
-                    if(cloudClicked.equals("dropbox")) {
+                    if(cloud.equals("dropboxCloud")) {
                         Label l = (Label)clickedFolder.getChildren().get(0);
                         if (t.getClickCount() == 2) {                                               
                             drop.setCurrentDirectory(l.getText());
-                            drop.displayFolder(l.getText(), dd);
+                            drop.displayFolder(l.getText(), dd, "forward");
                         } else {
                             drop.setCurrentDirectory(l.getText());
                         }
                     } else {
-                        if (t.getClickCount() == 2) 
+                        if (t.getClickCount() == 2) {       
+                            google.addLevel(googleFiles.get(Integer.valueOf(clickedFolder.getId())).getParents().get(0).getId());
+                            google.increaseLevel();
                             google.printFilesInFolder(CloudNet.EXISTING_USER, 
-                                    googleFiles.get(Integer.valueOf(clickedFolder.getId())).getId(), User.getGoogleToken());
+                                    googleFiles.get(Integer.valueOf(clickedFolder.getId())).getId(), User.getGoogleToken());                             
+                        } else {
+                            google.setFileToDownloadUrl(googleFiles.get(Integer.valueOf(clickedFolder.getId())).getDownloadUrl());
+                            google.setFileToDownloadId(googleFiles.get(Integer.valueOf(clickedFolder.getId())).getId());
+                            google.setFileToDownloadTitle(googleFiles.get(Integer.valueOf(clickedFolder.getId())).getTitle());
+                        }
                     }
                 }
             });
@@ -315,7 +383,7 @@ public class NoAccountsScreenController implements Initializable {
     }
     
     private void showConnectedIcon(Node n) {
-        n.setOpacity(0.5);
+        n.setOpacity(0.65);
     }
     
     @FXML
@@ -331,9 +399,63 @@ public class NoAccountsScreenController implements Initializable {
             drop.uploadFile();
     }
     
+    public void googleBackButtonPressed() {
+        google.printFilesInParent();
+    }
+    
+    public void dropboxBackButtonPressed() {
+        String goBackTo;
+        String previous = null;
+        String currentDirectory = UserDropBox.pathName;
+
+        String dir = currentDirectory;
+        Scanner scan = new Scanner(dir);
+        scan.useDelimiter("/");
+        while (scan.hasNext()) {
+            previous = scan.next();
+            if (!scan.hasNext()) {
+                drop.setCurrentDirectory(previous);
+            }
+        }
+
+        if (currentDirectory.length() <= 3) {
+            System.out.println("now at root");
+            goBackTo = currentDirectory;
+        } else {
+            goBackTo = currentDirectory.substring(0, currentDirectory.length() - drop.getCurrentDirectory().length()-2);
+        }
+        
+        UserDropBox.displayFolder(goBackTo, drop.getCliee(), "backward");
+    }
+    
+    @FXML
+    public void handleBackButtonPressed(MouseEvent event) {
+        if(cloudClicked.equals("dropbox"))
+            dropboxBackButtonPressed();
+        else 
+            googleBackButtonPressed();
+            
+    }
+    
+    @FXML
+    public void handleUploadPressed(MouseEvent event) {
+        if(cloudClicked.equals("dropbox"))
+            drop.uploadFile();
+        else if(cloudClicked.equals("google"))
+            google.uploadFile();
+    }
+    
+    @FXML
+    public void handleDownloadPressed(MouseEvent event) {
+        if(cloudClicked.equals("dropbox"))
+            drop.downLoadFile();
+        else if(cloudClicked.equals("google"))
+            google.downloadFile();
+    }
+    
     @FXML
     public void addMenu() {
-        drop.addMenu();
+        //drop.addMenu();
     }
     
 }

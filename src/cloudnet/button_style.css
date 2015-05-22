@@ -108,3 +108,19 @@
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
 }
+.upload_button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("../images/upload.png");
+    -fx-background-size: 33 40;
+}
+.download_button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("../images/download.png");
+    -fx-background-size: 33 40;
+}

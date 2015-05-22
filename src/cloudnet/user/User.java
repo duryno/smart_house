@@ -14,7 +14,7 @@ public abstract class User {
     private static String id;
     private static String dropboxToken;
     private static String googleToken;
-    private static String oneDriveToken;
+    private static String boxToken;
     
     public static void setID(String userID){
         id = userID;
@@ -28,8 +28,8 @@ public abstract class User {
         googleToken = aGoogleToken;
     }
 
-    public static void setOneDriveToken(String aOneDriveToken) {
-        oneDriveToken = aOneDriveToken;
+    public static void setBoxToken(String aOneDriveToken) {
+        boxToken = aOneDriveToken;
     }
 
     public static String getId() {
@@ -44,8 +44,8 @@ public abstract class User {
         return googleToken;
     }
 
-    public static String getOneDriveToken() {
-        return oneDriveToken;
+    public static String getBoxToken() {
+        return boxToken;
     }
 
 }
