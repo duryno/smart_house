@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <customers>
+        <customer>
+            <customerName> David </customerName>
+        </customer>
+        <customer>
+            <customerName> Anna </customerName>
+        </customer>
+        <customer>
+            <customerName> Camilla </customerName>
+        </customer>
+        <customer>
+            <customerName> John </customerName>
+        </customer>
+    </customers>
+</root>
+
