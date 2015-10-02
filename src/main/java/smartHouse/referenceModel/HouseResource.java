@@ -19,7 +19,7 @@ public interface HouseResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    House getHouse();     // Get house in json format
+    House getHouse(@PathParam("id") int id);     // Get house in json format
 
     @PUT
     @Path("{id}")
@@ -29,6 +29,6 @@ public interface HouseResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    void createHouse();    // create a new house and append it
+    void createHouse(@PathParam("id") int id);    // create a new house and append it
 
 }

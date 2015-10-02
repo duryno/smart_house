@@ -33,5 +33,5 @@ public interface DeviceResource {
 
     @DELETE
     @Path("{id}")
-    void deleteDevice();
+    void deleteDevice(@PathParam("id") int id);
 }

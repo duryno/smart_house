@@ -35,7 +35,7 @@ public interface RoomResource {
 
     @DELETE
     @Path("{id}")
-    void deleteRoom();
+    void deleteRoom(@PathParam("id") int id);
 
 
 

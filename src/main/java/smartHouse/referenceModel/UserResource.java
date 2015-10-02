@@ -35,5 +35,5 @@ public interface UserResource {
 
     @DELETE
     @Path("{id}")
-    void deleteUser();
+    void deleteUser(@PathParam("id") int id);
 }
