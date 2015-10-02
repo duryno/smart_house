@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by Rhino on 02/10/15.
+ * Created by Patrik Glendell on 02/10/15.
  */
 
 public class Environment {

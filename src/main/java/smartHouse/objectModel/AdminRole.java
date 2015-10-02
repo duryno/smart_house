@@ -1,7 +1,7 @@
 package smartHouse.objectModel;
 
 /**
- * Created by Rhino on 02/10/15.
+ * Created by Patrik Glendell on 02/10/15.
  */
 public enum AdminRole {
     USER,

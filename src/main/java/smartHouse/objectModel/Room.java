@@ -1,17 +1,16 @@
 package smartHouse.objectModel;
 
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by Rhino on 02/10/15.
+ * Created by Patrik Glendell on 02/10/15.
  */
 
 public class Room {
     private int id;
     private String name;
     private ConcurrentHashMap<Integer, Device> devices;
-    private Optional<Environment> environmentalData;
+    private Environment environmentalData;
 
     protected int getId() {
         return id;
@@ -37,7 +36,7 @@ public class Room {
         this.devices = devices;
     }
 
-    protected Optional<Environment> getEnvironmentalData() {
+    protected Environment getEnvironmentalData() {
         return environmentalData;
     }
 }
