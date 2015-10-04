@@ -3,12 +3,18 @@ package smartHouse.objectModel;
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
-import com.oracle.javafx.jmx.json.JSONDocument;
-public class Device {
+
+import smartHouse.resourceModel.DeviceResource;
+
+import javax.ws.rs.core.Response;
+import java.util.Date;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class Device implements DeviceResource {
     private int id;
     private String name;
     private Boolean status;
-    private JSONDocument Data;
+    private ConcurrentHashMap<Date,Double> Data;
 
     public Device() {
 
@@ -37,11 +43,36 @@ public class Device {
         this.status = status;
     }
 
-    protected com.oracle.javafx.jmx.json.JSONDocument getData() {
+    protected ConcurrentHashMap<Date,Double> getData() {
         return Data;
     }
 
-    protected void setData(com.oracle.javafx.jmx.json.JSONDocument data) {
+    protected void setData(ConcurrentHashMap<Date,Double> data) {
         Data = data;
+    }
+
+    @Override
+    public Response createDevice() {
+        return null;
+    }
+
+    @Override
+    public Response updateDevice(int id) {
+        return null;
+    }
+
+    @Override
+    public Device getDevice(int id) {
+        return null;
+    }
+
+    @Override
+    public ConcurrentHashMap<Integer, Device> getAllDevices() {
+        return null;
+    }
+
+    @Override
+    public Response deleteDevice(int id) {
+        return null;
     }
 }

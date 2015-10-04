@@ -1,30 +1,30 @@
-package smartHouse.referenceModel;
+package smartHouse.resourceModel;
 
 import smartHouse.objectModel.Environment;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
 
-@Path("House/{id}/Room/{id}/Environment")
 public interface EnvironmentResource {
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    Environment createEnvironment();
+    Response createEnvironment();
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    Environment updateEnvironment();
+    Response updateEnvironment();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     Environment getEnvironment();
 
     @DELETE
-    void deleteEnvironment();
+    Response deleteEnvironment();
 }

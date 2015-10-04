@@ -1,9 +1,14 @@
 package smartHouse.objectModel;
 
+import smartHouse.resourceModel.UserResource;
+
+import javax.ws.rs.core.Response;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
-public class User {
+public class User implements UserResource{
     private int id;
     private String userName;
     private java.net.URI email;
@@ -27,5 +32,30 @@ public class User {
 
     protected AdminRole getProfile() {
         return profile;
+    }
+
+    @Override
+    public Response createUser() {
+        return null;
+    }
+
+    @Override
+    public Response updateUser(int id) {
+        return null;
+    }
+
+    @Override
+    public User getUser(int id) {
+        return null;
+    }
+
+    @Override
+    public ConcurrentHashMap<Integer, User> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public Response deleteUser(int id) {
+        return null;
     }
 }

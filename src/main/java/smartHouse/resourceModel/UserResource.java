@@ -1,28 +1,27 @@
-package smartHouse.referenceModel;
+package smartHouse.resourceModel;
 
 import smartHouse.objectModel.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
+import javax.ws.rs.core.Response;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
 
-@Path("House/{id}/User")
 public interface UserResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    User createUser();
+    Response createUser();
 
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    User updateUser(@PathParam("id") int id);
+    Response updateUser(@PathParam("id") int id);
 
     @GET
     @Path("{id}")
@@ -31,9 +30,9 @@ public interface UserResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    ArrayList<User> getAllUsers();
+    ConcurrentHashMap<Integer,User> getAllUsers();
 
     @DELETE
     @Path("{id}")
-    void deleteUser(@PathParam("id") int id);
+    Response deleteUser(@PathParam("id") int id);
 }
