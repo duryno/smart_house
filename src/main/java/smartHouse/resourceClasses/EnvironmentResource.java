@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
  * Created by Patrik Glendell on 05/10/15.
  */
 public class EnvironmentResource implements EnvironmentResourceInterface {
-
+    public EnvironmentResource(){}
     @Override
     public Response createEnvironment() {
         return null;

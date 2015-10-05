@@ -4,13 +4,13 @@ import smartHouse.objectClasses.Device;
 import smartHouse.resourceInterfaces.DeviceResourceInterface;
 
 import javax.ws.rs.core.Response;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Collection;
 
 /**
  * Created by Patrik Glendell on 05/10/15.
  */
 public class DeviceResource implements DeviceResourceInterface {
-
+    public DeviceResource(){}
     @Override
     public Response createDevice() {
         return null;
@@ -27,7 +27,7 @@ public class DeviceResource implements DeviceResourceInterface {
     }
 
     @Override
-    public ConcurrentHashMap<Integer, Device> getAllDevices() {
+    public Collection<Device> getAllDevices() {
         return null;
     }
 

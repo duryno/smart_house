@@ -6,7 +6,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
 /**
  * Created by Patrik Glendell on 02/10/15.
  */

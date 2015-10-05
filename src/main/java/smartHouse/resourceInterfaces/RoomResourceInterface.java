@@ -7,7 +7,7 @@ import smartHouse.resourceClasses.EnvironmentResource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Collection;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
@@ -26,7 +26,7 @@ public interface RoomResourceInterface {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    ConcurrentHashMap<Integer,Room> getAllRooms();
+    Collection<Room> getAllRooms();
 
     @GET
     @Path("{id}")

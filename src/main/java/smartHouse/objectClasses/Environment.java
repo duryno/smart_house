@@ -1,7 +1,7 @@
 package smartHouse.objectClasses;
 
+import java.util.Collection;
 import java.util.Date;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
@@ -9,26 +9,47 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Environment {
     private int id;
-    private ConcurrentHashMap<Date, Double> energyConsumption;
-    private ConcurrentHashMap<Date, Double> waterConsumption;
+    private Collection<envData> energyConsumption;
+    private Collection<envData> waterConsumption;
 
     protected int getId() {
         return id;
     }
 
-    protected ConcurrentHashMap<Date, Double> getEnergyConsumption() {
+    protected Collection<envData> getEnergyConsumption() {
         return energyConsumption;
     }
 
-    protected void setEnergyConsumption(ConcurrentHashMap<Date, Double> energyConsumption) {
+    protected void setEnergyConsumption(Collection<envData> energyConsumption) {
         this.energyConsumption = energyConsumption;
     }
 
-    protected ConcurrentHashMap<Date, Double> getWaterConsumption() {
+    protected Collection<envData> getWaterConsumption() {
         return waterConsumption;
     }
 
-    protected void setWaterConsumption(ConcurrentHashMap<Date, Double> waterConsumption) {
+    protected void setWaterConsumption(Collection<envData> waterConsumption) {
         this.waterConsumption = waterConsumption;
+    }
+
+    public class envData {
+        private Date date;
+        private double value;
+
+        public Date getDate() {
+            return date;
+        }
+
+        public void setDate(Date date) {
+            this.date = date;
+        }
+
+        public double getValue() {
+            return value;
+        }
+
+        public void setValue(double value) {
+            this.value = value;
+        }
     }
 }

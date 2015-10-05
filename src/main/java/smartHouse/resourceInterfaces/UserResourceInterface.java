@@ -5,8 +5,7 @@ import smartHouse.objectClasses.User;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.concurrent.ConcurrentHashMap;
-
+import java.util.Collection;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
@@ -30,7 +29,7 @@ public interface UserResourceInterface {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    ConcurrentHashMap<Integer,User> getAllUsers();
+    Collection<User> getAllUsers();
 
     @DELETE
     @Path("{id}")

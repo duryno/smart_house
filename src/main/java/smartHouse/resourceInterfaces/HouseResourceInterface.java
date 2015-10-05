@@ -7,17 +7,16 @@ import smartHouse.objectClasses.User;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Collection;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
-@Path("/House")
 public interface HouseResourceInterface {
-
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    ConcurrentHashMap<Integer,House> getAllHouses();   //JSON list of all house uri's
+    Collection<House> getAllHouses();   //JSON list of all house uri's
 
     @GET
     @Path("{id}")

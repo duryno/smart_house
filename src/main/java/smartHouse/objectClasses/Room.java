@@ -1,6 +1,6 @@
 package smartHouse.objectClasses;
 
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Collection;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Room {
     private int id;
     private String name;
-    private ConcurrentHashMap<Integer, Device> devices;
+    private Collection<Device> devices;
     private Environment environmentalData;
 
     protected int getId() {
@@ -28,11 +28,11 @@ public class Room {
         this.name = name;
     }
 
-    protected ConcurrentHashMap<Integer, Device> getDevices() {
+    protected Collection<Device> getDevices() {
         return devices;
     }
 
-    protected void setDevices(ConcurrentHashMap<Integer, Device> devices) {
+    protected void setDevices(Collection<Device> devices) {
         this.devices = devices;
     }
 
