@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>smartHouse.objectModel</OriginalElement>
+  <nodes>
+    <node x="399.0" y="668.0">smartHouse.objectModel.House</node>
+    <node x="722.375" y="132.5">smartHouse.objectModel.AdminRole</node>
+    <node x="613.875" y="367.0">smartHouse.objectModel.User</node>
+    <node x="149.5" y="345.0">smartHouse.objectModel.Room</node>
+    <node x="319.0" y="0.0">smartHouse.objectModel.Device</node>
+    <node x="0.0" y="44.0">smartHouse.objectModel.Environment</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="smartHouse.objectModel.Room" target="smartHouse.objectModel.Device">
+      <point x="89.75" y="-136.5" />
+      <point x="418.75" y="320.0" />
+      <point x="508.5" y="320.0" />
+      <point x="0.0" y="147.5" />
+    </edge>
+    <edge source="smartHouse.objectModel.User" target="smartHouse.objectModel.AdminRole">
+      <point x="0.0" y="-114.5" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="smartHouse.objectModel.House" target="smartHouse.objectModel.Room">
+      <point x="-54.75" y="-59.5" />
+      <point x="453.75" y="643.0" />
+      <point x="329.0" y="643.0" />
+      <point x="0.0" y="136.5" />
+    </edge>
+    <edge source="smartHouse.objectModel.Room" target="smartHouse.objectModel.Environment">
+      <point x="-89.75" y="-136.5" />
+      <point x="239.25" y="320.0" />
+      <point x="149.5" y="320.0" />
+      <point x="0.0" y="103.5" />
+    </edge>
+    <edge source="smartHouse.objectModel.House" target="smartHouse.objectModel.User">
+      <point x="54.75" y="-59.5" />
+      <point x="563.25" y="643.0" />
+      <point x="773.375" y="643.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.724907063197026" x="466.7974358974359" y="393.5" />
+  <SelectedNodes>
+    <node>smartHouse.objectModel.House</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
