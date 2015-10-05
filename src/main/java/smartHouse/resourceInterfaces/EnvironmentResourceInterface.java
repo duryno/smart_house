@@ -1,6 +1,6 @@
-package smartHouse.resourceModel;
+package smartHouse.resourceInterfaces;
 
-import smartHouse.objectModel.Environment;
+import smartHouse.objectClasses.Environment;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
  * Created by Patrik Glendell on 02/10/15.
  */
 
-public interface EnvironmentResource {
+public interface EnvironmentResourceInterface {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

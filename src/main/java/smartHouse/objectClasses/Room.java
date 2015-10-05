@@ -1,15 +1,12 @@
-package smartHouse.objectModel;
+package smartHouse.objectClasses;
 
-import smartHouse.resourceModel.RoomResource;
-
-import javax.ws.rs.core.Response;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
 
-public class Room implements RoomResource{
+public class Room {
     private int id;
     private String name;
     private ConcurrentHashMap<Integer, Device> devices;
@@ -41,30 +38,5 @@ public class Room implements RoomResource{
 
     protected Environment getEnvironmentalData() {
         return environmentalData;
-    }
-
-    @Override
-    public Response createRoom(Room newRoom) {
-        return null;
-    }
-
-    @Override
-    public Response updateRoom(int id) {
-        return null;
-    }
-
-    @Override
-    public ConcurrentHashMap<Integer, Room> getAllRooms() {
-        return null;
-    }
-
-    @Override
-    public Room getRoom(int id) {
-        return null;
-    }
-
-    @Override
-    public Response deleteRoom(int id) {
-        return null;
     }
 }

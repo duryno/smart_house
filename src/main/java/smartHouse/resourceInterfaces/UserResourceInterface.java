@@ -1,36 +1,38 @@
-package smartHouse.resourceModel;
+package smartHouse.resourceInterfaces;
 
-import smartHouse.objectModel.Device;
+import smartHouse.objectClasses.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.concurrent.ConcurrentHashMap;
 
+
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
-public interface DeviceResource {
+
+public interface UserResourceInterface {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createDevice();
+    Response createUser();
 
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateDevice(@PathParam("id") int id);
+    Response updateUser(@PathParam("id") int id);
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    Device getDevice(@PathParam("id") int id);
+    User getUser(@PathParam("id") int id);
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    ConcurrentHashMap<Integer,Device> getAllDevices();
+    ConcurrentHashMap<Integer,User> getAllUsers();
 
     @DELETE
     @Path("{id}")
-    Response deleteDevice(@PathParam("id") int id);
+    Response deleteUser(@PathParam("id") int id);
 }

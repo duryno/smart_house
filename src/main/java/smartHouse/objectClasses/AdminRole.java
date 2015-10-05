@@ -1,4 +1,4 @@
-package smartHouse.objectModel;
+package smartHouse.objectClasses;
 
 /**
  * Created by Patrik Glendell on 02/10/15.

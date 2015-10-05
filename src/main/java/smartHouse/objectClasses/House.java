@@ -1,8 +1,5 @@
-package smartHouse.objectModel;
+package smartHouse.objectClasses;
 
-import smartHouse.resourceModel.HouseResource;
-
-import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by Patrik Glendell on 02/10/15.
  */
 @XmlRootElement
-public class House implements HouseResource{
+public class House {
     @XmlElement
     private int id;
 
@@ -26,26 +23,5 @@ public class House implements HouseResource{
     }
     public ConcurrentHashMap<Integer, User> getUsers() {
         return users;
-    }
-
-
-    @Override
-    public ConcurrentHashMap<Integer, House> getAllHouses() {
-        return null;
-    }
-
-    @Override
-    public House getHouse(int id) {
-        return null;
-    }
-
-    @Override
-    public Response updateHouse(int id) {
-        return null;
-    }
-
-    @Override
-    public Response createHouse(int id) {
-        return null;
     }
 }

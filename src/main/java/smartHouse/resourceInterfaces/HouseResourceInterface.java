@@ -1,8 +1,8 @@
-package smartHouse.resourceModel;
+package smartHouse.resourceInterfaces;
 
-import smartHouse.objectModel.House;
-import smartHouse.objectModel.Room;
-import smartHouse.objectModel.User;
+import smartHouse.objectClasses.House;
+import smartHouse.objectClasses.Room;
+import smartHouse.objectClasses.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by Patrik Glendell on 02/10/15.
  */
 @Path("/House")
-public interface HouseResource {
+public interface HouseResourceInterface {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

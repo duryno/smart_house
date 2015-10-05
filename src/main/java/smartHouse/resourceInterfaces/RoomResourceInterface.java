@@ -1,8 +1,8 @@
-package smartHouse.resourceModel;
+package smartHouse.resourceInterfaces;
 
-import smartHouse.objectModel.Device;
-import smartHouse.objectModel.Environment;
-import smartHouse.objectModel.Room;
+import smartHouse.objectClasses.Room;
+import smartHouse.resourceClasses.DeviceResource;
+import smartHouse.resourceClasses.EnvironmentResource;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by Patrik Glendell on 02/10/15.
  */
 
-public interface RoomResource {
+public interface RoomResourceInterface {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -38,12 +38,12 @@ public interface RoomResource {
     Response deleteRoom(@PathParam("id") int id);
 
     @Path("{DeviceID : \\d+}/Device")
-    default Device getDevice() {
-        return new Device();
+    default DeviceResource getDeviceResource() {
+        return new DeviceResource();
     }
     @Path("Environment")
-    default Environment getEnvironment() {
-        return new Environment();
+    default EnvironmentResource getEnvironmentResource() {
+        return new EnvironmentResource();
     }
 
 
