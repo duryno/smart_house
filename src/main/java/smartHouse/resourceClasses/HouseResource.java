@@ -1,12 +1,12 @@
 package smartHouse.resourceClasses;
 
 import smartHouse.objectClasses.House;
-import smartHouse.objectClasses.Room;
-import smartHouse.objectClasses.User;
 import smartHouse.resourceInterfaces.HouseResourceInterface;
 
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import javax.xml.ws.WebServiceException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -16,25 +16,31 @@ import java.util.Collection;
 
 @Path("/House")
 public class HouseResource implements HouseResourceInterface {
-    private House house;
-    private Collection<House> allHouses = new ArrayList<House>();
+
+    private Collection<House> houses;
 
     public HouseResource() {
-        house = new House();
-        house.setId(1);
-        house.setRooms(new ArrayList<Room>());
-        house.setUsers(new ArrayList<User>());
-        allHouses.add(house);
+        try {
+            houses = new ArrayList<>();
+            houses.add(new House(1,new ArrayList<>(),new ArrayList<>()));
+        } catch (WebServiceException e) {throw new RuntimeException();}
     }
 
     @Override
     public Collection<House> getAllHouses() {
-        return allHouses;
+        try {
+            return houses;
+        } catch (WebServiceException e) {
+            return null;
+        }
     }
 
     @Override
     public House getHouse(int id) {
-        return house;
+        return houses.stream()
+                .filter(house -> house.getId() == id)
+                .reduce((head,tail) -> head)
+                .orElse(null);
     }
 
     @Override
@@ -43,7 +49,8 @@ public class HouseResource implements HouseResourceInterface {
     }
 
     @Override
-    public Response createHouse(int id) {
+    public Response createHouse(@BeanParam House newHouse) {
         return null;
     }
+
 }

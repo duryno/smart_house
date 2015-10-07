@@ -1,8 +1,8 @@
 package smartHouse.resourceInterfaces;
 
 import smartHouse.objectClasses.House;
-import smartHouse.objectClasses.Room;
-import smartHouse.objectClasses.User;
+import smartHouse.resourceClasses.RoomResource;
+import smartHouse.resourceClasses.UserResource;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,15 +30,15 @@ public interface HouseResourceInterface {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createHouse(@PathParam("id") int id);    // create a new house and append it
+    Response createHouse(@BeanParam House newHouse);    // create a new house and append it
 
     @Path("{HouseID : \\d+}/User")
-    default User getUser() {
-        return new User();
+    default UserResource getUser() {
+        return new UserResource();
     }
     @Path("{HouseID : \\d+}/Room")
-    default Room getRoom() {
-        return new Room();
+    default RoomResource getRoom() {
+        return new RoomResource();
     }
 
 
