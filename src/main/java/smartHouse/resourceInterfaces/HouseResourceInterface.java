@@ -5,8 +5,10 @@ import smartHouse.resourceClasses.RoomResource;
 import smartHouse.resourceClasses.UserResource;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.Collection;
 
 /**
@@ -30,7 +32,7 @@ public interface HouseResourceInterface {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createHouse(@BeanParam House newHouse);    // create a new house and append it
+    Response createHouse(@Context UriInfo uri);    // create a new house and append it
 
     @Path("{HouseID : \\d+}/User")
     default UserResource getUser() {

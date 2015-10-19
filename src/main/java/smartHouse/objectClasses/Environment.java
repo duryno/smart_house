@@ -1,23 +1,16 @@
 package smartHouse.objectClasses;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
 
-@XmlRootElement
 public class Environment {
-    @XmlElement
-    private int id;
-    @XmlElementWrapper
-    private Collection<Data> energyConsumption;
-    @XmlElementWrapper
-    private Collection<Data> waterConsumption;
 
+    private int id;
+    private Collection<Data> energyConsumption;
+    private Collection<Data> waterConsumption;
 
     protected int getId() {
         return id;

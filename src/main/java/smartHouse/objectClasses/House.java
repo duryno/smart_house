@@ -1,7 +1,6 @@
 package smartHouse.objectClasses;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
@@ -9,11 +8,14 @@ import java.util.Random;
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
-@XmlRootElement
+@XmlRootElement(name = "House")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class House {
-    @XmlElement
+    @XmlAttribute
     private int id;
+    @XmlList
     private Collection<Room> rooms;
+    @XmlList
     private Collection<User> users;
 
     public House(int id, Collection<Room> rooms, Collection<User> users){

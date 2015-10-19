@@ -5,8 +5,10 @@ import smartHouse.resourceClasses.DeviceResource;
 import smartHouse.resourceClasses.EnvironmentResource;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.Collection;
 
 /**
@@ -17,7 +19,7 @@ public interface RoomResourceInterface {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createRoom(Room newRoom);
+    Response createRoom(@Context UriInfo uri);
 
     @PUT
     @Path("{id}")

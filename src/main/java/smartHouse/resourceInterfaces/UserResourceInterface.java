@@ -3,8 +3,10 @@ package smartHouse.resourceInterfaces;
 import smartHouse.objectClasses.User;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.Collection;
 
 /**
@@ -15,7 +17,7 @@ public interface UserResourceInterface {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createUser();
+    Response createUser(@Context UriInfo uri);
 
     @PUT
     @Path("{id}")

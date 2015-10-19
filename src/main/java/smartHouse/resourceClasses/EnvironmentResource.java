@@ -3,15 +3,18 @@ package smartHouse.resourceClasses;
 import smartHouse.objectClasses.Environment;
 import smartHouse.resourceInterfaces.EnvironmentResourceInterface;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 /**
  * Created by Patrik Glendell on 05/10/15.
  */
 public class EnvironmentResource implements EnvironmentResourceInterface {
     public EnvironmentResource(){}
+
     @Override
-    public Response createEnvironment() {
+    public Response createEnvironment(@Context UriInfo uri) {
         return null;
     }
 

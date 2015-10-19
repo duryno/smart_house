@@ -1,41 +1,62 @@
 package smartHouse.objectClasses;
 
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
-
+@XmlRootElement(name = "Room")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Room {
-
+    @XmlAttribute
     private int id;
-
+    @XmlElement
     private String name;
-
+    @XmlList
     private Collection<Device> devices;
-
+    @XmlElement
     private Environment environmentalData;
 
+    public Room(int id, String name) {
+        setId(id);
+        setName(name);
+        setDevices(new ArrayList<>());
+        this.environmentalData = new Environment();
+    }
+    public Room(){}
 
-    protected int getId() {
+
+    public int getId() {
         return id;
     }
-    protected void setId(int id) {
+
+    public void setId(int id) {
         this.id = id;
     }
-    protected String getName() {
+
+    public String getName() {
         return name;
     }
-    protected void setName(String name) {
+
+    public void setName(String name) {
         this.name = name;
     }
-    protected Collection<Device> getDevices() {
+
+    public Collection<Device> getDevices() {
         return devices;
     }
-    protected void setDevices(Collection<Device> devices) {
+
+    public void setDevices(Collection<Device> devices) {
         this.devices = devices;
     }
-    protected Environment getEnvironmentalData() {
+
+    public Environment getEnvironmentalData() {
         return environmentalData;
+    }
+
+    public void setEnvironmentalData(Environment environmentalData) {
+        this.environmentalData = environmentalData;
     }
 }

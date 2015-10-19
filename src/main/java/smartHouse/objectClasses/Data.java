@@ -1,17 +1,15 @@
 package smartHouse.objectClasses;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+
 import java.util.Date;
 
-@XmlRootElement
 public class Data {
-    @XmlElement
+
     private double rawData;
-    @XmlElement
     private Date timestamp;
 
     public Data(){}
+
     public double getRawData() {
         return rawData;
     }

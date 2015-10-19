@@ -4,25 +4,18 @@ package smartHouse.objectClasses;
  * Created by Patrik Glendell on 02/10/15.
  */
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 
-@XmlRootElement
 public class Device {
-    @XmlElement
-    private int id;
-    @XmlElement
-    private String name;
-    @XmlElement
-    private Boolean status;
-    @XmlElementWrapper
-    private Collection<Data> Data;
 
+    private int id;
+    private String name;
+    private Boolean status;
+    private Collection<Data> Data;
 
     public Device() {
     }
+
     protected int getId() {
         return id;
     }
