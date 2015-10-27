@@ -12,10 +12,20 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import javax.xml.ws.WebServiceException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryUsage;
 import java.net.URI;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static java.util.logging.Level.SEVERE;
 
 /**
  * Created by Patrik Glendell on 05/10/15.
@@ -32,15 +42,11 @@ public class HouseResource implements HouseResourceInterface {
             houses = new ArrayList<>();
             ArrayList<User> users = new ArrayList<>();
             ArrayList<Room> rooms = new ArrayList<>();
-            users.add(new User("PadaGle",
-                    UriBuilder.fromPath("Patrik.Glendell@outlook.com").build(),
-                    AdminRole.ADMIN));
-            rooms.add(new Room(0,"LivingRoom"));
-            rooms.add(new Room(1,"Bedroom"));
-            rooms.add(new Room(2,"Toilet"));
-            rooms.add(new Room(3,"Kitchen"));
-            houses.add(new House(counter.getAndIncrement(),rooms,users));
-        } catch (WebServiceException e) {throw new RuntimeException();}
+
+            houses.add(new House(counter.getAndIncrement(), rooms, users));
+        } catch (WebServiceException e) {
+            throw new RuntimeException();
+        }
     }
 
     @Override
@@ -56,7 +62,7 @@ public class HouseResource implements HouseResourceInterface {
     public House getHouse(int id) {
         return houses.stream()
                 .filter(house -> house.getId() == id)
-                .reduce((head,tail) -> head)
+                .reduce((head, tail) -> head)
                 .orElse(null);
     }
 
@@ -67,13 +73,35 @@ public class HouseResource implements HouseResourceInterface {
 
     @Override
     public Response createHouse(UriInfo uri) {
+        int id = 0;
+        int status = 700;
+        House house = null;
+
         try {
-            int incrementedCounter = counter.getAndIncrement();
-            houses.add(new House(incrementedCounter, new ArrayList<>(), new ArrayList<>()));
-            return Response.created(URI.create(uri.getBaseUri().toASCIIString() + incrementedCounter)).build();
-        }catch (Exception e) {
-            return Response.serverError().build();
+
+            DatabaseResource.queryToAddToDatabase("INSERT INTO house () VALUES ();");
+            ResultSet resultSet = DatabaseResource.queryDatabase("SELECT id_house FROM house;");
+
+            while (resultSet.next()) {
+                try {
+                    id = resultSet.getInt("id_house");
+                    house = new House(id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(HouseResource.class.getName()).log(SEVERE, null, ex);
+                }
+            }
+            resultSet.close();
+
+            status = 200;
+        } catch (SQLException ex) {
+            Logger.getLogger(HouseResource.class.getName()).log(SEVERE, null, ex);
         }
+
+        DatabaseResource.closeConnection();
+
+        //return json object on house?
+
+        return Response.status(status).entity("House id is - " + house.getId() + "\n").build();
     }
 
 }

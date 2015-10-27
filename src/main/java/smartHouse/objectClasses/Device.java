@@ -10,28 +10,28 @@ public class Device {
 
     private int id;
     private String name;
-    private Boolean status;
+    private String status;
     private Collection<Data> Data;
 
     public Device() {
     }
 
-    protected int getId() {
+    public int getId() {
         return id;
     }
-    protected void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
-    protected String getName() {
+    public String getName() {
         return name;
     }
-    protected void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
-    protected Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
-    protected void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
     protected Collection<Data> getData() {

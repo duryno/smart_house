@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="Maven: org.glassfish.jersey.containers:jersey-container-servlet:2.22">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/jersey/containers/jersey-container-servlet/2.22/jersey-container-servlet-2.22.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/jersey/containers/jersey-container-servlet/2.22/jersey-container-servlet-2.22-javadoc.jar!/" />
     </JAVADOC>

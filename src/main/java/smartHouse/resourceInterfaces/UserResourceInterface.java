@@ -16,8 +16,13 @@ import java.util.Collection;
 public interface UserResourceInterface {
 
     @POST
+    @Path("/createUser/{userName}/{password}/{email}/{adminRole}/{houseID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createUser(@Context UriInfo uri);
+    Response createUser(@PathParam("userName") String userName,
+                        @PathParam("email") String email,
+                        @PathParam("password") String password,
+                        @PathParam("adminRole") String adminRole,
+                        @PathParam("houseID") int houseID);
 
     @PUT
     @Path("{id}")
@@ -25,13 +30,8 @@ public interface UserResourceInterface {
     Response updateUser(@PathParam("id") int id);
 
     @GET
-    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    User getUser(@PathParam("id") int id);
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    Collection<User> getAllUsers();
+    User getUser();
 
     @DELETE
     @Path("{id}")

@@ -14,8 +14,11 @@ import java.util.Collection;
 public interface DeviceResourceInterface {
 
     @POST
+    @Path("/createDevice/{deviceName}/{deviceStatus}/{roomID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createDevice(@Context UriInfo uri);
+    Response createDevice(@PathParam("deviceName") String deviceName,
+                        @PathParam("deviceStatus") String deviceStatus,
+                        @PathParam("roomID") int roomID);
 
     @PUT
     @Path("{id}")
@@ -26,10 +29,6 @@ public interface DeviceResourceInterface {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     Device getDevice(@PathParam("id") int id);
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    Collection<Device> getAllDevices();
 
     @DELETE
     @Path("{id}")

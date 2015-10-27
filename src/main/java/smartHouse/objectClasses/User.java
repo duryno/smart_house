@@ -6,6 +6,7 @@ import java.net.URI;
 /**
  * Created by Patrik Glendell on 02/10/15.
  */
+
 @XmlRootElement(name = "User")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User {
@@ -13,33 +14,37 @@ public class User {
     private int id;
     @XmlElement
     private String userName;
-    @XmlSchemaType(name = "email")
-    private java.net.URI email;
+    @XmlElement(name = "email")
+    private String email;
     @XmlEnumValue("profile")
     private AdminRole profile;
 
-    public User(String userName, URI email, AdminRole profile) {
-        this.userName = userName;
-        this.email = email;
-        this.profile = profile;
-    }
     public User() {
     }
 
 
-    protected int getId() {
+    public int getId() {
         return id;
     }
-    protected void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
-    protected String getUserName() {
+    public String getUserName() {
         return userName;
     }
-    protected java.net.URI getEmail() {
+    public String getEmail() {
         return email;
     }
-    protected AdminRole getProfile() {
+    public AdminRole getProfile() {
         return profile;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setProfile(AdminRole profile) {
+        this.profile = profile;
     }
 }

@@ -1,9 +1,12 @@
 package smartHouse.resourceInterfaces;
 
+import org.json.JSONObject;
+import smartHouse.objectClasses.Device;
 import smartHouse.objectClasses.Room;
 import smartHouse.resourceClasses.DeviceResource;
 import smartHouse.resourceClasses.EnvironmentResource;
 
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -18,17 +21,18 @@ import java.util.Collection;
 public interface RoomResourceInterface {
 
     @POST
+    @Path("/createRoom/{roomName}/{roomTemperature}/{roomWaterConsumption}/{roomEnergyConsumption}/{houseID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createRoom(@Context UriInfo uri);
+    Response createRoom(@PathParam("roomName") String roomName,
+                        @PathParam("roomTemperature") int roomTemperature,
+                        @PathParam("roomWaterConsumption") int roomWaterConsumption,
+                        @PathParam("roomEnergyConsumption") int roomEnergyConsumption,
+                        @PathParam("houseID") int houseID);
 
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     Response updateRoom(@PathParam("id") int id);
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    Collection<Room> getAllRooms();
 
     @GET
     @Path("{id}")
@@ -38,6 +42,10 @@ public interface RoomResourceInterface {
     @DELETE
     @Path("{id}")
     Response deleteRoom(@PathParam("id") int id);
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    Collection<Device> getAllDevices();
 
     @Path("{DeviceID : \\d+}/Device")
     default DeviceResource getDeviceResource() {
