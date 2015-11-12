@@ -24,7 +24,7 @@ public class RoomResource implements RoomResourceInterface{
                 ",'"+room.getEnergyConsumption()+"','"+houseID+"')");
 
         DatabaseResource.closeConnection();
-        System.out.println("hwllo");
+        System.out.println("sup");
 
         return Response.status(Response.Status.OK).entity("great success").build();
     }
