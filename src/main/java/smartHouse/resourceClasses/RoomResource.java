@@ -1,33 +1,19 @@
 package smartHouse.resourceClasses;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import smartHouse.objectClasses.Data;
 import smartHouse.objectClasses.Device;
 import smartHouse.objectClasses.Room;
 import smartHouse.resourceInterfaces.RoomResourceInterface;
 
-import javax.json.JsonObject;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Created by Patrik Glendell on 05/10/15.
- *
- * Implemented by David Munro & Juraj Orszag
+ * Created by davidmunro on 12/11/2015.
  */
-@Path("/Room")
 public class RoomResource implements RoomResourceInterface{
 
     @Override
@@ -38,6 +24,7 @@ public class RoomResource implements RoomResourceInterface{
                 ",'"+room.getEnergyConsumption()+"','"+houseID+"')");
 
         DatabaseResource.closeConnection();
+        System.out.println("hwllo");
 
         return Response.status(Response.Status.OK).entity("great success").build();
     }
@@ -55,7 +42,7 @@ public class RoomResource implements RoomResourceInterface{
     @Override
     public Room getRoom(int roomID) {
         Room room = new Room();
-        List <Device> devices;
+        List<Device> devices;
         ResultSet roomResults = DatabaseResource.queryDatabase("SELECT * FROM room WHERE id=" + roomID);
         //can we use the same result set for both queries?
         //ResultSet resultSet = null;
@@ -80,11 +67,11 @@ public class RoomResource implements RoomResourceInterface{
         try {
             devices = new ArrayList<>();
             while (deviceResult.next()) {
-                    Device device = new Device();
-                    device.setId(deviceResult.getInt("device_id"));
-                    device.setName(deviceResult.getString("device_name"));
-                    device.setStatus(deviceResult.getString("device_status"));
-                    devices.add(device);
+                Device device = new Device();
+                device.setId(deviceResult.getInt("device_id"));
+                device.setName(deviceResult.getString("device_name"));
+                device.setStatus(deviceResult.getString("device_status"));
+                devices.add(device);
             }
 
             room.setDevices(devices);
@@ -109,4 +96,5 @@ public class RoomResource implements RoomResourceInterface{
 
         return null;
     }
+
 }
