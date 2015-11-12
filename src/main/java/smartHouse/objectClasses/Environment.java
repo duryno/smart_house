@@ -12,20 +12,24 @@ public class Environment {
     private Collection<Data> energyConsumption;
     private Collection<Data> waterConsumption;
 
-    protected int getId() {
+    public int getId() {
         return id;
     }
-    protected Collection<Data> getEnergyConsumption() {
+    public void setId(int id) {
+        this.id = id;
+    }
+    public Collection<Data> getEnergyConsumption() {
         return energyConsumption;
     }
-    protected void setEnergyConsumption(Collection<Data> energyConsumption) {
+    public void setEnergyConsumption(Collection<Data> energyConsumption) {
         this.energyConsumption = energyConsumption;
     }
-    protected Collection<Data> getWaterConsumption() {
+    public Collection<Data> getWaterConsumption() {
         return waterConsumption;
     }
-    protected void setWaterConsumption(Collection<Data> waterConsumption) {
+    public void setWaterConsumption(Collection<Data> waterConsumption) {
         this.waterConsumption = waterConsumption;
     }
+
 
 }

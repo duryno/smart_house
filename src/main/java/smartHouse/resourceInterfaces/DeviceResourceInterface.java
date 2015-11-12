@@ -10,25 +10,25 @@ import javax.ws.rs.core.UriInfo;
 import java.util.Collection;
 /**
  * Created by Patrik Glendell on 02/10/15.
+ *
+ * Implemented by David Munro & Juraj Orszag
  */
 public interface DeviceResourceInterface {
 
     @POST
-    @Path("/createDevice/{deviceName}/{deviceStatus}/{roomID}")
+    @Path("/createDevice/{roomID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createDevice(@PathParam("deviceName") String deviceName,
-                        @PathParam("deviceStatus") String deviceStatus,
-                        @PathParam("roomID") int roomID);
+    Response createDevice(Device device, @PathParam("roomID") int roomID);
 
     @PUT
-    @Path("{id}")
+    @Path("/{id}/{status}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateDevice(@PathParam("id") int id);
+    Response updateDevice(@PathParam("id") int id, @PathParam("status") String status);
 
     @GET
-    @Path("{id}")
+    @Path("{deviceID}")
     @Produces(MediaType.APPLICATION_JSON)
-    Device getDevice(@PathParam("id") int id);
+    Device getDevice(@PathParam("deviceID") int id);
 
     @DELETE
     @Path("{id}")

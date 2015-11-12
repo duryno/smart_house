@@ -11,6 +11,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+import javax.xml.transform.Result;
 import javax.xml.ws.WebServiceException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
@@ -29,41 +30,41 @@ import static java.util.logging.Level.SEVERE;
 
 /**
  * Created by Patrik Glendell on 05/10/15.
+ *
+ * Implemented by David Munro & Juraj Orszag
  */
 
 @Path("/House")
 public class HouseResource implements HouseResourceInterface {
-    private Collection<House> houses;
-    private AtomicInteger counter;
 
     public HouseResource() {
-        try {
-            counter = new AtomicInteger();
-            houses = new ArrayList<>();
-            ArrayList<User> users = new ArrayList<>();
-            ArrayList<Room> rooms = new ArrayList<>();
-
-            houses.add(new House(counter.getAndIncrement(), rooms, users));
-        } catch (WebServiceException e) {
-            throw new RuntimeException();
-        }
     }
 
     @Override
     public Collection<House> getAllHouses() {
-        try {
-            return houses;
-        } catch (WebServiceException | WebApplicationException ex) {
-            return null;
-        }
+        return null;
     }
 
     @Override
-    public House getHouse(int id) {
-        return houses.stream()
-                .filter(house -> house.getId() == id)
-                .reduce((head, tail) -> head)
-                .orElse(null);
+    public House getHouse(int houseID) {
+        ResultSet houseResults = DatabaseResource.queryDatabase("SELECT id, room_name FROM room WHERE house_id="+houseID);
+        House house = new House();
+        house.setId(houseID);
+        ArrayList <Room> rooms = new ArrayList<>();
+        try {
+            while(houseResults.next()){
+                Room room = new Room();
+                room.setId(houseResults.getInt("id"));
+                room.setName(houseResults.getString("room_name"));
+                rooms.add(room);
+            }
+            house.setRooms(rooms);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return house;
     }
 
     @Override
@@ -72,11 +73,9 @@ public class HouseResource implements HouseResourceInterface {
     }
 
     @Override
-    public Response createHouse(UriInfo uri) {
-        int id = 0;
-        int status = 700;
+    public Response createHouse(int id) {
+        Response.StatusType status = Response.Status.FORBIDDEN;
         House house = null;
-
         try {
 
             DatabaseResource.queryToAddToDatabase("INSERT INTO house () VALUES ();");
@@ -85,21 +84,20 @@ public class HouseResource implements HouseResourceInterface {
             while (resultSet.next()) {
                 try {
                     id = resultSet.getInt("id_house");
-                    house = new House(id);
+                    house = new House();
+                    house.setId(id);
                 } catch (SQLException ex) {
                     Logger.getLogger(HouseResource.class.getName()).log(SEVERE, null, ex);
                 }
             }
             resultSet.close();
 
-            status = 200;
+            status = Response.Status.OK;
         } catch (SQLException ex) {
             Logger.getLogger(HouseResource.class.getName()).log(SEVERE, null, ex);
         }
 
         DatabaseResource.closeConnection();
-
-        //return json object on house?
 
         return Response.status(status).entity("House id is - " + house.getId() + "\n").build();
     }

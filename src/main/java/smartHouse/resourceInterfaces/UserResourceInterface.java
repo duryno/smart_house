@@ -11,29 +11,42 @@ import java.util.Collection;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
+ *
+ * Implemented by David Munro & Juraj Orszag
  */
 
 public interface UserResourceInterface {
 
     @POST
-    @Path("/createUser/{userName}/{password}/{email}/{adminRole}/{houseID}")
+    @Path("/createUser/{houseID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createUser(@PathParam("userName") String userName,
-                        @PathParam("email") String email,
-                        @PathParam("password") String password,
-                        @PathParam("adminRole") String adminRole,
-                        @PathParam("houseID") int houseID);
+    Response createUser(User user, @PathParam("houseID") int houseId);
+
+    @POST
+    @Path("/createUser/{userName}/{password}/{email}/{houseID}")
+    Response createUserWeb(@PathParam("userName") String userName,
+                           @PathParam("password") String password,
+                           @PathParam("email") String email,
+                           @PathParam("houseID") int houseID);
 
     @PUT
-    @Path("{id}")
+    @Path("{userID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateUser(@PathParam("id") int id);
+    Response updateUser(User user, @PathParam("userID") int userID);
 
     @GET
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    User getUser();
+    User getUser(@PathParam("id") int id);
 
     @DELETE
     @Path("{id}")
     Response deleteUser(@PathParam("id") int id);
+
+    @GET
+    @Path("/{userName}/{password}/{houseID}")
+    Response login(@PathParam("userName") String userName,
+                   @PathParam("password") String password,
+                   @PathParam("houseID") int houseID);
+
 }

@@ -13,26 +13,28 @@ import java.util.Collection;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
+ *
+ * Implemented by David Munro & Juraj Orszag
  */
-public interface HouseResourceInterface {
+public interface HouseResourceInterface{
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     Collection<House> getAllHouses();   //JSON list of all house uri's
 
     @GET
-    @Path("{id}")
+    @Path("/getHouse/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     House getHouse(@PathParam("id") int id);     // Get house in json format
 
     @PUT
-    @Path("{id}")
+    @Path("/updateHouse/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     Response updateHouse(@PathParam("id") int id); // update specific house
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createHouse(@Context UriInfo uri);    // create a new house and append it
+    Response createHouse(int id);    // create a new house and append it
 
     @Path("{HouseID : \\d+}/User")
     default UserResource getUser() {

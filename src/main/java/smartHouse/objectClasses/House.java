@@ -7,6 +7,8 @@ import java.util.Random;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
+ *
+ * Implemented by David Munro & Juraj Orszag
  */
 @XmlRootElement(name = "House")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -18,20 +20,7 @@ public class House {
     @XmlList
     private Collection<User> users;
 
-    public House(int id, Collection<Room> rooms, Collection<User> users){
-        this.id = id;
-        this.setRooms(rooms);
-        this.setUsers(users);
-    }
-    public House(int id) {
-        this.id = id;
-        this.setRooms(new ArrayList<>());
-        this.setUsers(new ArrayList<>());
-    }
-    public House() {
-        this.id = new Random(100000).nextInt();
-        this.setRooms(new ArrayList<>());
-        this.setUsers(new ArrayList<>());
+    public House(){
     }
 
     public Collection<Room> getRooms() {
@@ -48,5 +37,8 @@ public class House {
     }
     public int getId() {
         return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 }

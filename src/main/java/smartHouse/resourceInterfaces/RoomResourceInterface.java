@@ -16,36 +16,35 @@ import java.util.Collection;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
+ *
+ * Implemented by David Munro & Juraj Orszag
  */
 
 public interface RoomResourceInterface {
 
     @POST
-    @Path("/createRoom/{roomName}/{roomTemperature}/{roomWaterConsumption}/{roomEnergyConsumption}/{houseID}")
+    @Path("/createRoom/{houseID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createRoom(@PathParam("roomName") String roomName,
-                        @PathParam("roomTemperature") int roomTemperature,
-                        @PathParam("roomWaterConsumption") int roomWaterConsumption,
-                        @PathParam("roomEnergyConsumption") int roomEnergyConsumption,
-                        @PathParam("houseID") int houseID);
+    Response createRoom(Room room, @PathParam("houseID") int houseID);
 
     @PUT
-    @Path("{id}")
+    @Path("/updateRoom/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateRoom(@PathParam("id") int id);
+    Response updateRoom(Room room, @PathParam("id") int roomID);
 
     @GET
-    @Path("{id}")
+    @Path("{roomID}")
     @Produces(MediaType.APPLICATION_JSON)
-    Room getRoom(@PathParam("id") int id);
+    Room getRoom(@PathParam("roomID") int roomID);
 
     @DELETE
     @Path("{id}")
-    Response deleteRoom(@PathParam("id") int id);
+    Response deleteRoom(@PathParam("id") int houseID);
 
     @GET
+    @Path("/getAllDevices/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    Collection<Device> getAllDevices();
+    Collection<Device> getAllDevices(@PathParam("id") int roomID);
 
     @Path("{DeviceID : \\d+}/Device")
     default DeviceResource getDeviceResource() {

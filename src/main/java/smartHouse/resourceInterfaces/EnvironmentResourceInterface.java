@@ -10,11 +10,14 @@ import javax.ws.rs.core.UriInfo;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
+ *
+ * Implemented by David Munro & Juraj Orszag
  */
 
 public interface EnvironmentResourceInterface {
 
     @POST
+    @Path("/createEnvironment")
     @Consumes(MediaType.APPLICATION_JSON)
     Response createEnvironment(@Context UriInfo uri);
 

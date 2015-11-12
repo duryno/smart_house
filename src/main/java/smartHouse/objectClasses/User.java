@@ -5,8 +5,9 @@ import java.net.URI;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
+ *
+ *Implemented by David Munro & Juraj Orszag
  */
-
 @XmlRootElement(name = "User")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User {
@@ -18,10 +19,11 @@ public class User {
     private String email;
     @XmlEnumValue("profile")
     private AdminRole profile;
+    @XmlElement
+    private String password;
 
     public User() {
     }
-
 
     public int getId() {
         return id;
@@ -46,5 +48,11 @@ public class User {
     }
     public void setProfile(AdminRole profile) {
         this.profile = profile;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

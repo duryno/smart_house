@@ -4,13 +4,20 @@ package smartHouse.objectClasses;
  * Created by Patrik Glendell on 02/10/15.
  */
 
+import javax.xml.bind.annotation.*;
 import java.util.Collection;
 
+@XmlRootElement(name = "Device")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Device {
 
+    @XmlAttribute
     private int id;
+    @XmlElement
     private String name;
+    @XmlElement
     private String status;
+    @XmlList
     private Collection<Data> Data;
 
     public Device() {
@@ -34,10 +41,10 @@ public class Device {
     public void setStatus(String status) {
         this.status = status;
     }
-    protected Collection<Data> getData() {
+    public Collection<Data> getData() {
         return Data;
     }
-    protected void setData(Collection<Data> data) {
+    public void setData(Collection<Data> data) {
         this.Data = data;
     }
 }

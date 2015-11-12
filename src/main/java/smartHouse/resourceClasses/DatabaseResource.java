@@ -19,8 +19,8 @@ import javax.servlet.ServletContextListener;
  */
 public class DatabaseResource implements ServletContextListener{
 
-    public static Connection con;
-    //private static Statement statement;
+    public static Connection con = null;
+    private static Statement statement;
 
     public DatabaseResource(){
 
@@ -37,9 +37,10 @@ public class DatabaseResource implements ServletContextListener{
 
     public static ResultSet queryDatabase(String query){
         ResultSet res = null;
-        Statement statement;
         try {
-            connectToDB();
+            if(con==null) {
+                connectToDB();
+            }
             statement = con.createStatement();
             statement.execute(query);
             res = statement.getResultSet();
@@ -51,11 +52,38 @@ public class DatabaseResource implements ServletContextListener{
         return res;
     }
 
+    public static String updateDatabase(String updateQuery){
+        String error = "no error reported";
+
+        try{
+            if(con==null){
+                connectToDB();
+            }
+
+            statement = con.createStatement();
+            statement.executeUpdate(updateQuery);
+            statement.close();
+            statement = null;
+            con.close();
+            con = null;
+
+
+        }catch (SQLException ee){
+            error = ee.getMessage();
+        } finally {
+            closeConnection();
+        }
+
+        return error;
+    }
+
     public static String queryToAddToDatabase(String sqlQuery){
         Statement state;
         String error = "no error";
         try{
-            connectToDB();
+            if(con==null){
+                connectToDB();
+            }
             state = con.createStatement();
             state.executeUpdate(sqlQuery);
             state.close();
@@ -66,34 +94,33 @@ public class DatabaseResource implements ServletContextListener{
         return error;
     }
 
-    public static void preparedQueryDatabase(String query, Object [] values){
+    public static void closeConnection(){
         try {
-            PreparedStatement preparedStatement = con.prepareStatement(query);
-
-            for(int i = 0; i < values.length; i++){
-                if(values [i] instanceof String){
-                    preparedStatement.setString(i+1, values[i].toString());
-                } else if(values [i] instanceof Integer){
-                    preparedStatement.setInt(i+1, Integer.parseInt(String.valueOf(values[i])));
-                }
-            }
-
-            preparedStatement.execute();
-
+            con.close();
+            con=null;
+            statement.close();
+            statement=null;
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                statement = null;
+            }
+            if(con != null){
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                con = null;
+            }
 
-    }
-
-
-    public static void closeConnection(){
-        try {
-            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseResource.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @Override

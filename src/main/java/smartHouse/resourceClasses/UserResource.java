@@ -1,54 +1,47 @@
 package smartHouse.resourceClasses;
 
-import com.sun.deploy.net.HttpRequest;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import smartHouse.objectClasses.AdminRole;
 import smartHouse.objectClasses.User;
 import smartHouse.resourceInterfaces.UserResourceInterface;
 
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.concurrent.atomic.AtomicInteger;
+import javax.ws.rs.core.Response;
 
 /**
  * Created by Patrik Glendell on 05/10/15.
+ *
+ * Implemented by David Munro & Juraj Orszag
  */
 @Path("/User")
 public class UserResource implements UserResourceInterface {
-    private Collection<User> users;
-    private AtomicInteger counter;
 
     public UserResource(){
     }
 
     @Override
-    public Response createUser(String userName, String email, String password, String adminRole, int houseID) {
-
+    public Response createUser(User user, int houseID) {
         DatabaseResource.queryDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
-                "('"+userName+"','"+email+"','"+password+"','"+adminRole+"','"+houseID+"')");
+                "('" + user.getUserName() + "','" + user.getEmail() + "','" + user.getPassword() + "'" +
+                ",'" + user.getProfile() + "','" + houseID + "')");
 
-        return Response.status(Response.Status.OK).entity("Great success").build();
+        return Response.status(Response.Status.OK).entity("You created a User!").build();
     }
 
     @Override
-    public Response updateUser(int id) {
-        return null;
+    public Response updateUser(User user, int userID) {
+        String error = DatabaseResource.updateDatabase("UPDATE user SET user_name='"+user.getUserName()+"', email='"+user.getEmail()+"'" +
+                ", password='"+user.getPassword()+"', admin='"+user.getProfile()+"' WHERE user_id='"+userID+"'");
+
+        return Response.status(Response.Status.OK).entity("User updated! Error = "+error).build();
     }
 
     @Override
-    public User getUser() {
+    public User getUser(int id) {
         User user = new User();
 
-        ResultSet userResult = DatabaseResource.queryDatabase("SELECT * FROM user WHERE user_id="+1);
+        ResultSet userResult = DatabaseResource.queryDatabase("SELECT * FROM user WHERE user_id="+id);
 
         try{
             while(userResult.next()){
@@ -61,6 +54,7 @@ public class UserResource implements UserResourceInterface {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        DatabaseResource.closeConnection();
 
         return user;
     }
@@ -68,5 +62,22 @@ public class UserResource implements UserResourceInterface {
     @Override
     public Response deleteUser(int id) {
         return null;
+    }
+
+    @Override
+    public Response login(String userName, String password, int houseID){
+        boolean authorisedUser = Login.checkLogin(userName,password,houseID);
+        Response.StatusType status = authorisedUser == true ? Response.Status.OK : Response.Status.FORBIDDEN;
+
+        return Response.status(status).entity(authorisedUser).build();
+    }
+
+    @Override
+    public Response createUserWeb(String userName, String password, String email, int houseID){
+        String error = DatabaseResource.queryToAddToDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
+                "('" + userName + "','" + email + "','" + password + "'" +
+                ", USER,'" + houseID + "')");
+
+        return Response.status(Response.Status.OK).entity("You created a User! Is there error..."+error).build();
     }
 }

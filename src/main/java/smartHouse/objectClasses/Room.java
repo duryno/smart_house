@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Patrik Glendell on 02/10/15.
  *
- * Author David Munro & Juraj Orszag
+ * Implemented by David Munro & Juraj Orszag
  */
 @XmlRootElement(name = "Room")
 @XmlAccessorType(XmlAccessType.FIELD)
