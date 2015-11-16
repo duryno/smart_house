@@ -29,7 +29,10 @@
           <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.core:2.6.0" />
           <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.asm:2.6.0" />
           <element id="library" level="project" name="Maven: org.glassfish:javax.json:1.0.4" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.36" />
           <element id="library" level="project" name="Maven: org.json:json:20150729" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.36" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -76,7 +76,7 @@ public class UserResource implements UserResourceInterface {
     public Response createUserWeb(String userName, String password, String email, int houseID){
         String error = DatabaseResource.queryToAddToDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
                 "('" + userName + "','" + email + "','" + password + "'" +
-                ", USER,'" + houseID + "')");
+                ", 'USER','" + houseID + "')");
 
         return Response.status(Response.Status.OK).entity("You created a User! Is there error..."+error).build();
     }

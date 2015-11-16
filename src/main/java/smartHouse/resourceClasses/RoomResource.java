@@ -4,6 +4,7 @@ import smartHouse.objectClasses.Device;
 import smartHouse.objectClasses.Room;
 import smartHouse.resourceInterfaces.RoomResourceInterface;
 
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Created by davidmunro on 12/11/2015.
  */
+@Path("/Room")
 public class RoomResource implements RoomResourceInterface{
 
     @Override
@@ -24,7 +26,6 @@ public class RoomResource implements RoomResourceInterface{
                 ",'"+room.getEnergyConsumption()+"','"+houseID+"')");
 
         DatabaseResource.closeConnection();
-        System.out.println("sup");
 
         return Response.status(Response.Status.OK).entity("great success").build();
     }
@@ -44,9 +45,6 @@ public class RoomResource implements RoomResourceInterface{
         Room room = new Room();
         List<Device> devices;
         ResultSet roomResults = DatabaseResource.queryDatabase("SELECT * FROM room WHERE id=" + roomID);
-        //can we use the same result set for both queries?
-        //ResultSet resultSet = null;
-        //resultSet = DatabaseResource.queryDatabase("SELECT * FROM room WHERE id=" + roomID);
 
         try {
             while(roomResults.next()){

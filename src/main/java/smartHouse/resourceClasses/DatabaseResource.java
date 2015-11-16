@@ -62,11 +62,6 @@ public class DatabaseResource implements ServletContextListener{
 
             statement = con.createStatement();
             statement.executeUpdate(updateQuery);
-            statement.close();
-            statement = null;
-            con.close();
-            con = null;
-
 
         }catch (SQLException ee){
             error = ee.getMessage();
@@ -95,14 +90,15 @@ public class DatabaseResource implements ServletContextListener{
     }
 
     public static void closeConnection(){
-        try {
-            con.close();
-            con=null;
-            statement.close();
-            statement=null;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+ //       try {
+ //
+ //           con.close();
+ //           con=null;
+ //           statement.close();
+ //           statement=null;
+ //       } catch (SQLException e) {
+ //           e.printStackTrace();
+ //       }
 
             if(statement != null){
                 try {

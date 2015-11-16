@@ -6,24 +6,15 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3856c341-1bb3-4784-b965-08e00e60d3f6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/Login.java" />
-      <change type="MOVED" beforePath="C:\Users\davidmunro\Documents\GitHubFolder\SmartHouseAPItest\src\main\java\smartHouse\resourceClasses\roomResource.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/RoomResource.java" />
+    <list default="true" id="3856c341-1bb3-4784-b965-08e00e60d3f6" name="Default" comment="Added">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DatabaseResource.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DatabaseResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Device.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Device.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DeviceResource.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DeviceResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/DeviceResourceInterface.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/DeviceResourceInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Environment.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Environment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/EnvironmentResource.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/EnvironmentResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/EnvironmentResourceInterface.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/EnvironmentResourceInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/House.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/House.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/HouseResource.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/HouseResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/HouseResourceInterface.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/HouseResourceInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Room.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Room.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/RoomResourceInterface.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/RoomResourceInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/User.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/MainApplication/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/MainApplication/MainApp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/RoomResource.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/RoomResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SmartHouseAPI.iml" afterPath="$PROJECT_DIR$/SmartHouseAPI.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/SmartHouseAPI_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/SmartHouseAPI_war_exploded.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/UserResource.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/UserResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/UserResourceInterface.java" afterPath="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/UserResourceInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SmartHouseAPI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,31 +37,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DeviceResourceInterface.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/DeviceResourceInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RoomResourceInterface.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/RoomResourceInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="27" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DeviceResource.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DeviceResource.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <caret line="43" column="104" selection-start-line="43" selection-start-column="99" selection-end-line="43" selection-end-column="104" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DeviceResourceInterface.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/DeviceResourceInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="20" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -80,37 +61,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/UserResource.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EnvironmentResource.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/EnvironmentResource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="19" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Environment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Environment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19736843">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+              <caret line="81" column="5" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -120,27 +71,17 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DatabaseResource.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="37" column="27" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="27" />
+              <caret line="100" column="3" selection-start-line="100" selection-start-column="3" selection-end-line="100" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Login.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/Login.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserResourceInterface.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserResourceInterface.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/UserResourceInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="32" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.32072368">
+              <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -160,7 +101,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="deployy" />
+        <entry key="$PROJECT_DIR$" value="Juraj" />
       </map>
     </option>
   </component>
@@ -173,7 +114,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/roomResource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/smartHouse/MainApplication/MainApp.java" />
         <option value="$PROJECT_DIR$/target/restAPI/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DriverHandler.java" />
@@ -182,11 +122,8 @@
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/HouseResourceTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Device.java" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/Login.java" />
-        <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DatabaseResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/EnvironmentResourceInterface.java" />
-        <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/EnvironmentResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Environment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/RoomResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/RoomResourceInterface.java" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/House.java" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Room.java" />
@@ -196,7 +133,11 @@
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/DeviceResourceInterface.java" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/UserResourceInterface.java" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/HouseResourceInterface.java" />
+        <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/EnvironmentResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/smartHouse/MainApplication/MainApp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/RoomResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/UserResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DatabaseResource.java" />
       </list>
     </option>
   </component>
@@ -262,7 +203,11 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Tests" />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -277,7 +222,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHouseAPItest" />
+              <option name="myItemId" value="smart_house" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -287,7 +232,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHouseAPItest" />
+              <option name="myItemId" value="smart_house" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -305,7 +250,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHouseAPItest" />
+              <option name="myItemId" value="smart_house" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -331,7 +276,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHouseAPItest" />
+              <option name="myItemId" value="smart_house" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -361,7 +306,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHouseAPItest" />
+              <option name="myItemId" value="smart_house" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -391,7 +336,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHouseAPItest" />
+              <option name="myItemId" value="smart_house" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -421,7 +366,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHouseAPItest" />
+              <option name="myItemId" value="smart_house" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -447,10 +392,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Tests" />
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -458,10 +399,10 @@
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.24482758" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../gson-2.4.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SmartHouseAPItest" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
@@ -1049,6 +990,13 @@
       <workItem from="1447245252944" duration="55000" />
       <workItem from="1447253031492" duration="1278000" />
       <workItem from="1447319927341" duration="734000" />
+      <workItem from="1447323256466" duration="1625000" />
+      <workItem from="1447496282490" duration="191000" />
+      <workItem from="1447502294692" duration="1089000" />
+      <workItem from="1447512253847" duration="815000" />
+      <workItem from="1447539186623" duration="457000" />
+      <workItem from="1447577483904" duration="1662000" />
+      <workItem from="1447665583070" duration="356000" />
     </task>
     <task id="LOCAL-00001" summary="Create user, device and room">
       <created>1445952467197</created>
@@ -1056,11 +1004,23 @@
       <option name="project" value="LOCAL" />
       <updated>1445952467197</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Create">
+      <created>1447323695415</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1447323695415</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added">
+      <created>1447323963405</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1447323963405</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143356000" />
+    <option name="totallyTimeSpent" value="149551000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1082,7 +1042,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329429" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1119,7 +1079,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Create user, device and room" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create user, device and room" />
+    <MESSAGE value="Create" />
+    <MESSAGE value="Added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1132,10 +1094,25 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/RoomResource.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/EnvironmentResource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+          <caret line="20" column="61" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DeviceResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Environment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1188,13 +1165,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/RoomResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/RoomResourceInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1234,13 +1204,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="65" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/RoomResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1293,13 +1256,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15490533">
           <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/MainApplication/MainApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="45" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -1511,22 +1467,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/HouseResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17269737">
-          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/HouseResourceInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17269737">
-          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/EnvironmentResourceInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32072368">
@@ -1538,31 +1478,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/RoomResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="35" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/RoomResourceInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="27" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/UserResourceInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="32" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1570,47 +1485,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DatabaseResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="27" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/DeviceResourceInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/UserResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/MainApplication/MOXyJSONProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5427632">
-          <caret line="49" column="74" selection-start-line="49" selection-start-column="74" selection-end-line="49" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/MainApplication/JsonMoxyConfigurationContextResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5427632">
-          <caret line="28" column="74" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="74" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1618,6 +1492,76 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/EnvironmentResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="61" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Environment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/MainApplication/MOXyJSONProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="74" selection-start-line="49" selection-start-column="74" selection-end-line="49" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/MainApplication/JsonMoxyConfigurationContextResolver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="74" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/MainApplication/MainApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/RoomResourceInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/RoomResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/HouseResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/HouseResourceInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DatabaseResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="100" column="3" selection-start-line="100" selection-start-column="3" selection-end-line="100" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -1625,23 +1569,31 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/DeviceResource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <caret line="43" column="104" selection-start-line="43" selection-start-column="99" selection-end-line="43" selection-end-column="104" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/EnvironmentResource.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/DeviceResourceInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="19" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="19" />
+          <caret line="28" column="20" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/objectClasses/Environment.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceClasses/UserResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19736843">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="5" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/smartHouse/resourceInterfaces/UserResourceInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32072368">
+          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1680,7 +1632,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.24482758" />
               </list>
             </option>
           </splitter-proportions>
@@ -1692,7 +1644,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.24482758" />
               </list>
             </option>
           </splitter-proportions>
@@ -1704,7 +1656,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.24482758" />
                 <option value="0.6" />
               </list>
             </option>

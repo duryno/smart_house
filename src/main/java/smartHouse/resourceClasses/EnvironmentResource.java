@@ -19,7 +19,6 @@ public class EnvironmentResource implements EnvironmentResourceInterface {
 
     @Override
     public Response createEnvironment(@Context UriInfo uri) {
-
         return null;
     }
 

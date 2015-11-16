@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by Patrik Glendell on 05/10/15.
  */
-public class MainApp extends Application {
+public class MainApp extends Application{
 
     private Set<Object> singletons = new HashSet<>();
     private Set<Class<?>> perRequestResources = new HashSet<>();
