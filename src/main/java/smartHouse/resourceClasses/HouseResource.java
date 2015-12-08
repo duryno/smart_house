@@ -47,14 +47,17 @@ public class HouseResource implements HouseResourceInterface {
 
     @Override
     public House getHouse(int houseID) {
-        ResultSet houseResults = DatabaseResource.queryDatabase("SELECT id, room_name FROM room WHERE house_id="+houseID);
+        ResultSet houseResults = DatabaseResource.queryDatabase("SELECT id, room_name, " +
+                "room_temperature FROM room WHERE house_id="+houseID);
         House house = new House();
         house.setId(houseID);
         ArrayList <Room> rooms = new ArrayList<>();
+
         try {
             while(houseResults.next()){
                 Room room = new Room();
                 room.setId(houseResults.getInt("id"));
+                room.setTemperature(houseResults.getInt("room_temperature"));
                 room.setName(houseResults.getString("room_name"));
                 rooms.add(room);
             }
@@ -63,7 +66,7 @@ public class HouseResource implements HouseResourceInterface {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        DatabaseResource.closeConnection();
         return house;
     }
 

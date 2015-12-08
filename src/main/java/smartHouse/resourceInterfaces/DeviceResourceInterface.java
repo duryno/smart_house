@@ -33,4 +33,8 @@ public interface DeviceResourceInterface {
     @DELETE
     @Path("{id}")
     Response deleteDevice(@PathParam("id") int id);
+
+    @GET
+    @Path("/updateTemp/{temp}/{roomID}")
+    Response updateTemperature(@PathParam("temp") int temp, @PathParam("roomID") int roomID);
 }

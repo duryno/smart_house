@@ -20,14 +20,14 @@ public class RoomResource implements RoomResourceInterface{
 
     @Override
     public Response createRoom(Room room, int houseID) {
-        DatabaseResource.queryDatabase("INSERT into room (room_name, room_temperature, room_water_consumption, "+
+        DatabaseResource.queryToAddToDatabase("INSERT into room (room_name, room_temperature, room_water_consumption, "+
                 "room_energy_consumption, house_id) VALUES "+
                 "('"+room.getName()+"','"+room.getTemperature()+"','"+room.getWaterConsumption()+"'" +
                 ",'"+room.getEnergyConsumption()+"','"+houseID+"')");
 
         DatabaseResource.closeConnection();
 
-        return Response.status(Response.Status.OK).entity("great success").build();
+        return Response.status(Response.Status.CREATED).entity("Room created").build();
     }
 
     @Override
@@ -44,8 +44,7 @@ public class RoomResource implements RoomResourceInterface{
     public Room getRoom(int roomID) {
         Room room = new Room();
         List<Device> devices;
-        ResultSet roomResults = DatabaseResource.queryDatabase("SELECT * FROM room WHERE id=" + roomID);
-
+        ResultSet roomResults = DatabaseResource.queryDatabase("SELECT * FROM room WHERE id="+roomID);
         try {
             while(roomResults.next()){
                 room.setId(roomResults.getInt("id"));
@@ -59,8 +58,6 @@ public class RoomResource implements RoomResourceInterface{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        //resultSet = DatabaseResource.queryDatabase("SELECT * FROM device WHERE room_id="+roomID);
         ResultSet deviceResult = DatabaseResource.queryDatabase("SELECT * FROM device WHERE room_id="+roomID);
         try {
             devices = new ArrayList<>();

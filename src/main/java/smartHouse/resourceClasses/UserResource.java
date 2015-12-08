@@ -1,5 +1,6 @@
 package smartHouse.resourceClasses;
 
+import smartHouse.MainApplication.MainApp;
 import smartHouse.objectClasses.AdminRole;
 import smartHouse.objectClasses.User;
 import smartHouse.resourceInterfaces.UserResourceInterface;
@@ -25,16 +26,17 @@ public class UserResource implements UserResourceInterface {
         DatabaseResource.queryDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
                 "('" + user.getUserName() + "','" + user.getEmail() + "','" + user.getPassword() + "'" +
                 ",'" + user.getProfile() + "','" + houseID + "')");
-
+        DatabaseResource.closeConnection();
         return Response.status(Response.Status.OK).entity("You created a User!").build();
     }
 
     @Override
     public Response updateUser(User user, int userID) {
-        String error = DatabaseResource.updateDatabase("UPDATE user SET user_name='"+user.getUserName()+"', email='"+user.getEmail()+"'" +
+        boolean successful = DatabaseResource.updateDatabase("UPDATE user SET user_name='"+user.getUserName()+"', email='"+user.getEmail()+"'" +
                 ", password='"+user.getPassword()+"', admin='"+user.getProfile()+"' WHERE user_id='"+userID+"'");
-
-        return Response.status(Response.Status.OK).entity("User updated! Error = "+error).build();
+        Response.StatusType responseStatus = successful == true ? Response.Status.OK : Response.Status.BAD_REQUEST;
+        DatabaseResource.closeConnection();
+        return Response.status(responseStatus).entity(successful).build();
     }
 
     @Override
@@ -50,7 +52,6 @@ public class UserResource implements UserResourceInterface {
                 user.setProfile(userResult.getString("admin").equals("USER") ? AdminRole.USER:AdminRole.ADMIN);
                 user.setUserName(userResult.getString("user_name"));
             }
-
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -65,19 +66,37 @@ public class UserResource implements UserResourceInterface {
     }
 
     @Override
-    public Response login(String userName, String password, int houseID){
-        boolean authorisedUser = Login.checkLogin(userName,password,houseID);
-        Response.StatusType status = authorisedUser == true ? Response.Status.OK : Response.Status.FORBIDDEN;
+    public Response login(String userName, String password, int houseID, String hash){
+        Response.StatusType status = null;
+        boolean authorisedUser = false;
+        String serverHash = HashHelper.hashCreator(MainApp.secretKey, houseID);
+        if(serverHash.equals(hash)){
+            authorisedUser = Login.checkLogin(userName,password,houseID);
+            status = authorisedUser == true ? Response.Status.OK : Response.Status.FORBIDDEN;
+        }
+        else if(!serverHash.equals(hash)){
+            status = Response.Status.FORBIDDEN;
+        }
 
         return Response.status(status).entity(authorisedUser).build();
     }
 
     @Override
     public Response createUserWeb(String userName, String password, String email, int houseID){
-        String error = DatabaseResource.queryToAddToDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
+        DatabaseResource.queryToAddToDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
                 "('" + userName + "','" + email + "','" + password + "'" +
                 ", 'USER','" + houseID + "')");
-
-        return Response.status(Response.Status.OK).entity("You created a User! Is there error..."+error).build();
+        DatabaseResource.closeConnection();
+        return Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .header("Access-Control-Max-Age", "1209600")
+                .entity("You created a user")
+                .build();
     }
+       // return Response.status(Response.Status.OK).entity("You created a User!").build();
+
 }

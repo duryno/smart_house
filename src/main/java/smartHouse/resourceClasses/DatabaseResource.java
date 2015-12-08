@@ -23,7 +23,6 @@ public class DatabaseResource implements ServletContextListener{
     private static Statement statement;
 
     public DatabaseResource(){
-
     }
 
     public static void connectToDB(){
@@ -35,6 +34,17 @@ public class DatabaseResource implements ServletContextListener{
         }
     }
 
+    public static void closeStatement(Statement statement){
+        if(statement!=null){
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            statement = null;
+        }
+    }
+
     public static ResultSet queryDatabase(String query){
         ResultSet res = null;
         try {
@@ -42,7 +52,8 @@ public class DatabaseResource implements ServletContextListener{
                 connectToDB();
             }
             statement = con.createStatement();
-            statement.execute(query);
+            statement.executeQuery(query);
+
             res = statement.getResultSet();
 
         } catch (SQLException ex) {
@@ -52,29 +63,40 @@ public class DatabaseResource implements ServletContextListener{
         return res;
     }
 
-    public static String updateDatabase(String updateQuery){
-        String error = "no error reported";
-
+    public static boolean updateDatabase(String updateQuery){
+        boolean successfull = false;
+        Statement state;
         try{
             if(con==null){
                 connectToDB();
             }
-
             statement = con.createStatement();
-            statement.executeUpdate(updateQuery);
-
+            int c = statement.executeUpdate(updateQuery);
+            if(c>0) successfull = true;
         }catch (SQLException ee){
-            error = ee.getMessage();
-        } finally {
-            closeConnection();
+            ee.getMessage();
         }
-
-        return error;
+        return successfull;
     }
 
-    public static String queryToAddToDatabase(String sqlQuery){
+    public static void queryToAddToDatabase(String sqlQuery){
         Statement state;
-        String error = "no error";
+        try{
+            if(con==null){
+                connectToDB();
+            }
+            state = con.createStatement();
+            state.executeUpdate(sqlQuery);
+            state.close();
+
+        }catch(SQLException ee){
+            ee.getMessage();
+        }
+    }
+
+    public static String updateDatabaseWithError(String sqlQuery){
+        String error = "No error";
+        Statement state;
         try{
             if(con==null){
                 connectToDB();
@@ -86,37 +108,27 @@ public class DatabaseResource implements ServletContextListener{
         }catch(SQLException ee){
             error = ee.getMessage();
         }
+
         return error;
     }
 
     public static void closeConnection(){
- //       try {
- //
- //           con.close();
- //           con=null;
- //           statement.close();
- //           statement=null;
- //       } catch (SQLException e) {
- //           e.printStackTrace();
- //       }
-
-            if(statement != null){
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                statement = null;
+        if(statement != null){
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            if(con != null){
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                con = null;
+            statement = null;
+        }
+        if(con != null){
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
+            con = null;
+        }
     }
 
     @Override

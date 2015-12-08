@@ -34,14 +34,15 @@ public class DeviceResource implements DeviceResourceInterface {
 
         DatabaseResource.closeConnection();
 
-        return Response.status(Response.Status.OK).entity("Great success").build();
+        return Response.status(Response.Status.CREATED).entity("Great success").build();
     }
 
     @Override
     public Response updateDevice(int id, String status) {
-        String error = DatabaseResource.updateDatabase("UPDATE device SET device_status='"+status+"' WHERE device_id="+id);
+        boolean successful = DatabaseResource.updateDatabase("UPDATE device SET device_status='"+status+"' WHERE device_id="+id);
         DatabaseResource.closeConnection();
-        return Response.status(Response.Status.OK).entity("You have updated the device, error = " +error).build();
+        Response.StatusType responseStatus = successful == true ? Response.Status.OK : Response.Status.BAD_REQUEST;
+        return Response.status(responseStatus).entity(successful).build();
     }
 
     @Override
@@ -68,5 +69,13 @@ public class DeviceResource implements DeviceResourceInterface {
     @Override
     public Response deleteDevice(int id) {
         return null;
+    }
+
+    @Override
+    public Response updateTemperature(int temp, int roomID){
+        boolean successful = DatabaseResource.updateDatabase("UPDATE room SET room_temperature='"+temp+"' WHERE id="+roomID);
+        Response.StatusType responseStatus = successful == true ? Response.Status.OK : Response.Status.BAD_REQUEST;
+        DatabaseResource.closeConnection();
+        return Response.status(responseStatus).entity(successful).build();
     }
 }

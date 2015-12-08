@@ -44,9 +44,10 @@ public interface UserResourceInterface {
     Response deleteUser(@PathParam("id") int id);
 
     @GET
-    @Path("/{userName}/{password}/{houseID}")
+    @Path("/{userName}/{password}/{houseID}/{hash}")
     Response login(@PathParam("userName") String userName,
                    @PathParam("password") String password,
-                   @PathParam("houseID") int houseID);
+                   @PathParam("houseID") int houseID,
+                   @PathParam("hash") String hash);
 
 }
