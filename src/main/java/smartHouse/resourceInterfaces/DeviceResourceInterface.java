@@ -16,25 +16,36 @@ import java.util.Collection;
 public interface DeviceResourceInterface {
 
     @POST
-    @Path("/createDevice/{roomID}")
+    @Path("/createDevice/{roomID}/{houseID}/{hash}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createDevice(Device device, @PathParam("roomID") int roomID);
+    Response createDevice(Device device,
+                          @PathParam("roomID") int roomID,
+                          @PathParam("houseID") int houseID,
+                          @PathParam("hash") String hash);
 
     @PUT
-    @Path("/{id}/{status}")
+    @Path("/{id}/{status}/{houseID}/{hash}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateDevice(@PathParam("id") int id, @PathParam("status") String status);
+    Response updateDevice(@PathParam("id") int id,
+                          @PathParam("status") String status,
+                          @PathParam("houseID") int houseID,
+                          @PathParam("hash") String hash);
 
     @GET
-    @Path("{deviceID}")
+    @Path("{deviceID}/{houseID}/{hash}")
     @Produces(MediaType.APPLICATION_JSON)
-    Device getDevice(@PathParam("deviceID") int id);
+    Device getDevice(@PathParam("deviceID") int id,
+                     @PathParam("houseID")int houseID,
+                     @PathParam("hash") String hash);
 
     @DELETE
     @Path("{id}")
     Response deleteDevice(@PathParam("id") int id);
 
     @GET
-    @Path("/updateTemp/{temp}/{roomID}")
-    Response updateTemperature(@PathParam("temp") int temp, @PathParam("roomID") int roomID);
+    @Path("/updateTemp/{temp}/{roomID}({houseID}/{hash}")
+    Response updateTemperature(@PathParam("temp") int temp,
+                               @PathParam("roomID") int roomID,
+                               @PathParam("houseID") int houseID,
+                               @PathParam("hash") String hash);
 }

@@ -22,12 +22,26 @@ public class UserResource implements UserResourceInterface {
     }
 
     @Override
-    public Response createUser(User user, int houseID) {
-        DatabaseResource.queryDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
-                "('" + user.getUserName() + "','" + user.getEmail() + "','" + user.getPassword() + "'" +
-                ",'" + user.getProfile() + "','" + houseID + "')");
-        DatabaseResource.closeConnection();
-        return Response.status(Response.Status.OK).entity("You created a User!").build();
+    public Response createUser(User user, int houseID, String hash) {
+        String serverHash = HashHelper.hashCreator(MainApp.secretKey, houseID);
+        Response ret = null;
+
+        if(serverHash.equals(hash)){
+            try{
+                DatabaseResource.queryDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
+                        "('" + user.getUserName() + "','" + user.getEmail() + "','" + user.getPassword() + "'" +
+                        ",'" + user.getProfile() + "','" + houseID + "')");
+                DatabaseResource.closeConnection();
+                ret = Response.status(Response.Status.CREATED).entity("New Room created").build();
+            }catch (NullPointerException ee){
+                ret = Response.status(Response.Status.NO_CONTENT).entity("Server has gone away").build();
+            }
+        }
+        else if(!serverHash.equals(hash)){
+            ret = Response.status(Response.Status.FORBIDDEN).entity("You are not authorized").build();
+        }
+
+        return ret;
     }
 
     @Override
@@ -82,21 +96,28 @@ public class UserResource implements UserResourceInterface {
     }
 
     @Override
-    public Response createUserWeb(String userName, String password, String email, int houseID){
-        DatabaseResource.queryToAddToDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
-                "('" + userName + "','" + email + "','" + password + "'" +
-                ", 'USER','" + houseID + "')");
-        DatabaseResource.closeConnection();
+    public Response createUserWeb(String userName, String password, String email, int houseID, String hash){
+        String serverHash = HashHelper.hashCreator(MainApp.secretKey, houseID);
+        Response.StatusType responseStatus = Response.Status.FORBIDDEN;
+
+        if(serverHash.equals(hash)){
+            DatabaseResource.queryToAddToDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
+                    "('" + userName + "','" + email + "','" + password + "'" +
+                    ", 'USER','" + houseID + "')");
+            DatabaseResource.closeConnection();
+            responseStatus = Response.Status.CREATED;
+        }
+        else if(!serverHash.equals(hash)){
+            responseStatus = Response.Status.FORBIDDEN;
+        }
+
         return Response
-                .status(200)
+                .status(responseStatus)
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
                 .header("Access-Control-Allow-Credentials", "true")
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
                 .header("Access-Control-Max-Age", "1209600")
-                .entity("You created a user")
                 .build();
     }
-       // return Response.status(Response.Status.OK).entity("You created a User!").build();
-
 }

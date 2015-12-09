@@ -8,6 +8,8 @@ import java.util.Set;
 
 /**
  * Created by Patrik Glendell on 05/10/15.
+ *
+ * Implemented Patrick, David & Juraj
  */
 public class MainApp extends Application{
 
@@ -117,8 +119,6 @@ public class MainApp extends Application{
                     secretKey += chars[14];
                     break;
             }
-
-
         }
     }
 

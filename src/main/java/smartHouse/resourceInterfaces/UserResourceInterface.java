@@ -18,16 +18,17 @@ import java.util.Collection;
 public interface UserResourceInterface {
 
     @POST
-    @Path("/createUser/{houseID}")
+    @Path("/createUser/{houseID}/{hash}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createUser(User user, @PathParam("houseID") int houseId);
+    Response createUser(User user, @PathParam("houseID") int houseId, @PathParam("hash") String hash);
 
     @POST
-    @Path("/createUser/{userName}/{password}/{email}/{houseID}")
+    @Path("/createUser/{userName}/{password}/{email}/{houseID}/{hash}")
     Response createUserWeb(@PathParam("userName") String userName,
                            @PathParam("password") String password,
                            @PathParam("email") String email,
-                           @PathParam("houseID") int houseID);
+                           @PathParam("houseID") int houseID,
+                           @PathParam("hash") String hash);
 
     @PUT
     @Path("{userID}")

@@ -1,5 +1,7 @@
 package smartHouse.resourceClasses;
 
+import smartHouse.MainApplication.MainApp;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

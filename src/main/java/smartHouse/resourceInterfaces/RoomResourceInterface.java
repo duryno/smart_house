@@ -23,19 +23,26 @@ import java.util.Collection;
 public interface RoomResourceInterface {
 
     @POST
-    @Path("/createRoom/{houseID}")
+    @Path("/createRoom/{houseID}/{hash}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createRoom(Room room, @PathParam("houseID") int houseID);
+    Response createRoom(Room room,
+                        @PathParam("houseID") int houseID,
+                        @PathParam("hash") String hash);
 
     @PUT
-    @Path("/updateRoom/{id}")
+    @Path("/updateRoom/{id}/{houseID}/{hash}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateRoom(Room room, @PathParam("id") int roomID);
+    Response updateRoom(Room room,
+                        @PathParam("id") int roomID,
+                        @PathParam("houseID") int houseID,
+                        @PathParam("hash") String hash);
 
     @GET
-    @Path("{roomID}")
+    @Path("{roomID}/{houseID}/{hash}")
     @Produces(MediaType.APPLICATION_JSON)
-    Room getRoom(@PathParam("roomID") int roomID);
+    Room getRoom(@PathParam("roomID") int roomID,
+                 @PathParam("houseID") int houseID,
+                 @PathParam("hash") String hash);
 
     @DELETE
     @Path("{id}")

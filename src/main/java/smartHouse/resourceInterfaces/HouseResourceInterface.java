@@ -23,9 +23,9 @@ public interface HouseResourceInterface{
     Collection<House> getAllHouses();   //JSON list of all house uri's
 
     @GET
-    @Path("/getHouse/{id}")
+    @Path("/getHouse/{id}/{hash}")
     @Produces(MediaType.APPLICATION_JSON)
-    House getHouse(@PathParam("id") int id);     // Get house in json format
+    House getHouse(@PathParam("id") int id, @PathParam("hash") String hash);     // Get house in json format
 
     @PUT
     @Path("/updateHouse/{id}")

@@ -1,10 +1,12 @@
 package smartHouse.resourceClasses;
 
+import smartHouse.MainApplication.MainApp;
 import smartHouse.objectClasses.AdminRole;
 import smartHouse.objectClasses.House;
 import smartHouse.objectClasses.Room;
 import smartHouse.objectClasses.User;
 import smartHouse.resourceInterfaces.HouseResourceInterface;
+import sun.applet.Main;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.WebApplicationException;
@@ -37,8 +39,7 @@ import static java.util.logging.Level.SEVERE;
 @Path("/House")
 public class HouseResource implements HouseResourceInterface {
 
-    public HouseResource() {
-    }
+    public HouseResource() {}
 
     @Override
     public Collection<House> getAllHouses() {
@@ -46,27 +47,35 @@ public class HouseResource implements HouseResourceInterface {
     }
 
     @Override
-    public House getHouse(int houseID) {
-        ResultSet houseResults = DatabaseResource.queryDatabase("SELECT id, room_name, " +
-                "room_temperature FROM room WHERE house_id="+houseID);
-        House house = new House();
-        house.setId(houseID);
-        ArrayList <Room> rooms = new ArrayList<>();
+    public House getHouse(int houseID, String hash) {
+        String serverHash = HashHelper.hashCreator(MainApp.secretKey, houseID);
+        House house = null;
+        if(serverHash.equals(hash)){
+            ResultSet houseResults = DatabaseResource.queryDatabase("SELECT id, room_name, " +
+                    "room_temperature FROM room WHERE house_id="+houseID);
+            house = new House();
+            house.setId(houseID);
+            ArrayList <Room> rooms = new ArrayList<>();
 
-        try {
-            while(houseResults.next()){
-                Room room = new Room();
-                room.setId(houseResults.getInt("id"));
-                room.setTemperature(houseResults.getInt("room_temperature"));
-                room.setName(houseResults.getString("room_name"));
-                rooms.add(room);
+            try {
+                while(houseResults.next()){
+                    Room room = new Room();
+                    room.setId(houseResults.getInt("id"));
+                    room.setTemperature(houseResults.getInt("room_temperature"));
+                    room.setName(houseResults.getString("room_name"));
+                    rooms.add(room);
+                }
+                house.setRooms(rooms);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            house.setRooms(rooms);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            DatabaseResource.closeConnection();
         }
-        DatabaseResource.closeConnection();
+        else if(!serverHash.equals(hash)){
+            house = null;
+        }
+
         return house;
     }
 

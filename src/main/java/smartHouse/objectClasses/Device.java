@@ -17,7 +17,7 @@ public class Device {
     private String name;
     @XmlElement
     private String status;
-    @XmlList
+
     private Collection<Data> Data;
 
     public Device() {
