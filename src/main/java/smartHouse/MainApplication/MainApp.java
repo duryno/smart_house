@@ -1,8 +1,10 @@
 package smartHouse.MainApplication;
 
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.media.sse.SseFeature;
 import org.glassfish.jersey.server.ServerProperties;
 import smartHouse.Notification.SseBroadcasterResource;
+import smartHouse.Notification.SseResource;
 import smartHouse.monitoring.ServerEventListener;
 import smartHouse.resourceClasses.*;
 
@@ -138,11 +140,11 @@ public class MainApp extends Application{
         singletons.add(new org.glassfish.jersey.moxy.json.MoxyJsonFeature());
         singletons.add(new JsonMoxyConfigurationContextResolver());
 
-        //singletons.add(new LoggingFilter(log,false));
-        singletons.add(new ServerEventListener());
+        singletons.add(new LoggingFilter());
+        //singletons.add(new ServerEventListener());
         // push method
         singletons.add(new SseBroadcasterResource());
-
+        singletons.add(new SseResource());
         return singletons;
     }
 

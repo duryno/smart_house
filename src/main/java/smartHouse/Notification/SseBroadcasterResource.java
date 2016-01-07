@@ -1,9 +1,6 @@
 package smartHouse.Notification;
 
-import org.glassfish.jersey.media.sse.EventOutput;
-import org.glassfish.jersey.media.sse.OutboundEvent;
-import org.glassfish.jersey.media.sse.SseBroadcaster;
-import org.glassfish.jersey.media.sse.SseFeature;
+import org.glassfish.jersey.media.sse.*;
 
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
