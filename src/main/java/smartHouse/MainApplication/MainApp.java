@@ -1,9 +1,15 @@
 package smartHouse.MainApplication;
 
+import org.glassfish.jersey.media.sse.SseFeature;
+import org.glassfish.jersey.server.ServerProperties;
+import smartHouse.Notification.SseBroadcasterResource;
+import smartHouse.monitoring.ServerEventListener;
 import smartHouse.resourceClasses.*;
 
 import javax.ws.rs.core.Application;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -15,8 +21,11 @@ public class MainApp extends Application{
 
     private char [] chars = {'A','b','5','l','r','6','-','+','w','d','1','W','P','1'
             ,'?','&','C','*','*','=','U','<','a','.','D','J','U','4','^','@','m','o'};
+
     private Set<Object> singletons = new HashSet<>();
     private Set<Class<?>> perRequestResources = new HashSet<>();
+    private Map<String,Object> properties = new HashMap<>();
+
     public static String secretKey = "";
 
     public MainApp() {
@@ -124,15 +133,15 @@ public class MainApp extends Application{
 
     @Override
     public Set<Object> getSingletons() {
-        // configure JSON support and formatting for automatic marchalling and de-marchalling
 
-        singletons.add(new HouseResource());
-        singletons.add(new RoomResource());
-        singletons.add(new UserResource());
-        singletons.add(new DeviceResource());
-        singletons.add(new EnvironmentResource());
+        // configure JSON support and formatting for automatic marchalling and de-marchalling
         singletons.add(new org.glassfish.jersey.moxy.json.MoxyJsonFeature());
         singletons.add(new JsonMoxyConfigurationContextResolver());
+
+        //singletons.add(new LoggingFilter(log,false));
+        singletons.add(new ServerEventListener());
+        // push method
+        singletons.add(new SseBroadcasterResource());
 
         return singletons;
     }
@@ -142,6 +151,21 @@ public class MainApp extends Application{
         //Configure Moxy behavior
         //perRequestResources.add(JsonMoxyConfigurationContextResolver.class);
         //perRequestResources.add(HouseResource.class);
+
+        perRequestResources.add(RoomResource.class);
+        perRequestResources.add(UserResource.class);
+        perRequestResources.add(DeviceResource.class);
+        perRequestResources.add(EnvironmentResource.class);
+        perRequestResources.add(HouseResource.class);
+        perRequestResources.add(SseFeature.class);
+
         return perRequestResources;
+    }
+    @Override
+    public Map<String,Object> getProperties(){
+        properties.put(ServerProperties.TRACING, "ALL");
+        properties.put(ServerProperties.MONITORING_ENABLED,true);
+
+        return properties;
     }
 }

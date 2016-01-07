@@ -32,7 +32,7 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.36" />
           <element id="library" level="project" name="Maven: org.json:json:20150729" />
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
-          <element id="library" level="project" name="mysql-connector-java-5.1.36" />
+          <element id="library" level="project" name="Maven: org.glassfish.jersey.media:jersey-media-sse:2.22" />
         </element>
       </element>
       <element id="directory" name="META-INF">

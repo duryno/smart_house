@@ -3,32 +3,33 @@ package smartHouse.resourceInterfaces;
 import smartHouse.objectClasses.Environment;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * Created by Patrik Glendell on 02/10/15.
  *
- * Implemented by David Munro & Juraj Orszag
+ * Implemented by Pablo Cano
  */
 
 public interface EnvironmentResourceInterface {
-
+    
     @POST
-    @Path("/createEnvironment")
+    @Path("/createEnvironment/{roomID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response createEnvironment(@Context UriInfo uri);
+    Response createEnvironment(Environment environment, @PathParam("roomID") int roomID);
 
     @PUT
+    @Path("/{id}/{value}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response updateEnvironment();
+    Response updateEnvironment(@PathParam("id") int id, @PathParam("value") String value);
 
     @GET
+    @Path("{deviceID}")
     @Produces(MediaType.APPLICATION_JSON)
-    Environment getEnvironment();
+    Environment getEnvironment(@PathParam("environmentID") int id);
 
     @DELETE
-    Response deleteEnvironment();
+    @Path("{id}")
+    Response deleteEnvironment(@PathParam("id") int id);
 }
