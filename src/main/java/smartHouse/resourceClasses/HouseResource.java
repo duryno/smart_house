@@ -89,7 +89,6 @@ public class HouseResource implements HouseResourceInterface {
         Response.StatusType status = Response.Status.FORBIDDEN;
         House house = null;
         try {
-
             DatabaseResource.queryToAddToDatabase("INSERT INTO house () VALUES ();");
             ResultSet resultSet = DatabaseResource.queryDatabase("SELECT id_house FROM house;");
 

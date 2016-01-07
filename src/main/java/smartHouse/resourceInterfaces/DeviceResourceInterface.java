@@ -1,5 +1,6 @@
 package smartHouse.resourceInterfaces;
 
+import smartHouse.objectClasses.AdminRole;
 import smartHouse.objectClasses.Device;
 
 import javax.ws.rs.*;
@@ -39,11 +40,15 @@ public interface DeviceResourceInterface {
                      @PathParam("hash") String hash);
 
     @DELETE
-    @Path("{id}")
-    Response deleteDevice(@PathParam("id") int id);
+    @Path("{id}/{role}/{houseID}/{hash}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    Response deleteDevice(@PathParam("id") int id,
+                          @PathParam("role") String role,
+                          @PathParam("houseID") int houseID,
+                          @PathParam("hash") String hash);
 
     @GET
-    @Path("/updateTemp/{temp}/{roomID}({houseID}/{hash}")
+    @Path("/updateTemp/{temp}/{roomID}/{houseID}/{hash}")
     Response updateTemperature(@PathParam("temp") int temp,
                                @PathParam("roomID") int roomID,
                                @PathParam("houseID") int houseID,

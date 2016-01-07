@@ -81,15 +81,15 @@ public class UserResource implements UserResourceInterface {
 
     @Override
     public Response login(String userName, String password, int houseID, String hash){
-        Response.StatusType status = null;
+        Response.StatusType status = Response.Status.UNAUTHORIZED;
         boolean authorisedUser = false;
         String serverHash = HashHelper.hashCreator(MainApp.secretKey, houseID);
         if(serverHash.equals(hash)){
             authorisedUser = Login.checkLogin(userName,password,houseID);
-            status = authorisedUser == true ? Response.Status.OK : Response.Status.FORBIDDEN;
+            status = authorisedUser == true ? Response.Status.OK : Response.Status.UNAUTHORIZED;
         }
         else if(!serverHash.equals(hash)){
-            status = Response.Status.FORBIDDEN;
+            status = Response.Status.UNAUTHORIZED;
         }
 
         return Response.status(status).entity(authorisedUser).build();
