@@ -17,7 +17,7 @@ import org.glassfish.jersey.media.sse.SseFeature;
 
 /**
  *
- * @author Juraj
+ * @author Calle
  */
 public interface SseBroadcasterResourceInterface2 {
     

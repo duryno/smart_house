@@ -16,7 +16,7 @@ import smartHouse.resourceInterfaces.SseBroadcasterResourceInterface2;
 
 /**
  *
- * @author Juraj
+ * @author Calle
  */
 @Path("/broadcast")
 public class SseBroadcasterResource2 implements SseBroadcasterResourceInterface2{
