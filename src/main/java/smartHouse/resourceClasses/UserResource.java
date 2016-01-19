@@ -28,11 +28,11 @@ public class UserResource implements UserResourceInterface {
 
         if(serverHash.equals(hash)){
             try{
-                DatabaseResource.queryDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
-                        "('" + user.getUserName() + "','" + user.getEmail() + "','" + user.getPassword() + "'" +
-                        ",'" + user.getProfile() + "','" + houseID + "')");
+                DatabaseResource.queryToAddToDatabase("INSERT into user (user_name, email, password, admin, house_id) VALUES " +
+                    "('" + user.getUserName() + "','" + user.getEmail() + "','" + user.getPassword() + "'" +
+                    ", 'USER','" + houseID + "')");
                 DatabaseResource.closeConnection();
-                ret = Response.status(Response.Status.CREATED).entity("New Room created").build();
+                ret = Response.status(Response.Status.CREATED).entity("New User created").build();
             }catch (NullPointerException ee){
                 ret = Response.status(Response.Status.NO_CONTENT).entity("Server has gone away").build();
             }

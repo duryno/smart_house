@@ -68,6 +68,7 @@
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-sse</artifactId>
         </dependency>
+
     </dependencies>
     <properties>
         <jersey.version>2.22</jersey.version>

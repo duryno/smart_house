@@ -50,11 +50,11 @@ public class RoomResource implements RoomResourceInterface{
         Response ret = null;
 
         if(serverHash.equals(hash)){
-            DatabaseResource.queryDatabase("UPDATE room SET room_name='" + room.getName() + "', " +
+            DatabaseResource.updateDatabase("UPDATE room SET room_name='" + room.getName() + "', " +
                     "room_temperature='" + room.getTemperature() + "', room_water_consumption='" + room.getWaterConsumption() + "'," +
-                    "room_energy_consumption='" + room.getEnergyConsumption() + "' WHERE room_id=" + roomID);
+                    "room_energy_consumption='" + room.getEnergyConsumption() + "' WHERE id=" + roomID);
             DatabaseResource.closeConnection();
-            ret = Response.status(Response.Status.NO_CONTENT).entity("Room created").build();
+            ret = Response.status(Response.Status.NO_CONTENT).entity("Room updated").build();
         }
         else if(!serverHash.equals(hash)){
             ret = Response.status(Response.Status.FORBIDDEN).entity("You are not authorized").build();
